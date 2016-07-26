@@ -1,13 +1,11 @@
 'use strict';
-const authEvents = require('./auth/events.js');
 
-// user require with a reference to bundle the file and use it in this file
-// var example = require('./example');
-
-// use require without a reference to ensure a file is bundled
-
-require('./example');
-
+const authEvents = require('./auth/handles.js');
+//starts web serve, when page is loaded, index.js will run which holds
+//information that relate to the other scripts file.
+//webpack is the template we use. It turns everything into one gigantic
+//javascript file.
+// On document ready
 $(() => {
-  authEvents.addHandlers();
+  authEvents.addHandlers(); //whatever is in here is what gets run
 });

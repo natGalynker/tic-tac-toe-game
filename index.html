@@ -8,25 +8,61 @@
     </head>
     <body class="container-fluid">
       <h1>Example</h1>
-      <fieldset>
-        <legend>Sign Up</legend>
-        <form id="Sign-Up">
-          <input type="text" name="credentials[player_name]" placeholder="enter Player Name">
-          <input type="email" name="credentials[email]" placeholder="enter email">
-          <input type="password" name="credentials[password]" placeholder="enter password">
-          <input type="password" name="credentials[confirm_password]" placeholder="re-enter password">
-          <input type="submit" name="submit" value="Sign Up">
+      <form id="sign-up">
+        <fieldset>
+          <legend>Sign up!</legend>
+          <input type="text" name="credentials[player_name"
+          placeholder="player name">
+          <input type="text" name="credentials[email]" placeholder="e-mail">
+          <input type="password" name="credentials[password]"
+          placeholder="password">
+          <input type="password" name="credentials[password_confirmation]"
+          placeholder="confirm password">
+          <input type="submit" name="submit" value="Sign up!">
+        </fieldset>
       </form>
-    </fieldset>
-    <fieldset>
-    <form id="Sign-In">
-      <input type="text" name="credentials[player_name]" placeholder="enter Player Name">
-      <input type="email" name="credentials[email]" placeholder="enter email">
-      <input type="password" name="credentials[password]" placeholder="enter password">
-      <input type="submit" name="submit" value="Sign In">
-  </form>
-</fieldset>
-      <div class="container-fluid">
+      <form id="sign-in">
+        <fieldset>
+          <legend>Sign in!</legend>
+          <input type="text" name="credentials[email]" placeholder="e-mail">
+          <input type="password" name="credentials[password]"
+          placeholder="password">
+          <input type="text" name="credentials[player_name]"
+          placeholder="player">
+          <input type="submit" name="submit" value="Sign in!">
+        </fieldset>
+      </form>
+      <form id="change-password">
+        <fieldset>
+          <legend>Change password!</legend>
+          <input type="password" name="passwords[old]"
+          placeholder="old password">
+          <input type="password" name="passwords[new]"placeholder="new password">
+          <input type="submit" name="submit" value="Change Password!">
+        </fieldset>
+      </form>
+      <form id="sign-out">
+        <fieldset>
+          <legend>Log Out!</legend>
+          <input type="password" name="passwords[old]"
+          placeholder="old password">
+          <input type="password" name="passwords[new]"placeholder="new password">
+          <input type="submit" name="submit" value="Logout!">
+        </fieldset>
+      </form>
+      <form id="change-player">
+        <fieldset>
+          <legend>Change Player!</legend>
+          <input type="text" name="player_name[old]"
+          placeholder="new player">
+          <input type="text" name="player_name[new]" placeholder="new player">
+          <input type="password" name="credentials[password]"
+          placeholder="old password">
+          <input type="submit" name="submit" value="Update!">
+        </fieldset>
+      </form>
+      <p>Accessing an authenticated API.</p>
+      <!-- <div class="container-fluid">
         <div class="row-1">
           <div class="box-1">Test</div>
           <div class="box-2">Test</div>
@@ -42,6 +78,6 @@
             <div class="box-8">Test</div>
             <div class="box-9">Test</div>
         </div>
-      </div>
+      </div> -->
     </body>
 </html>
