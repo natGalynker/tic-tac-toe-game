@@ -1,44 +1,19 @@
+$box1-bg: #fff000;
+$box2-bg: #00ff7f;
+$box3-bg: #3bb9ff;
+$box4-bg: #d84c00;
+$box5-bg: #ffce3d;
+$box6-bg: #298487;
+$box7-bg: #fc9c3a;
+$box8-bg: #224f41;
+$box9-bg: #c8a2c8;
+$pureblack: #000;
+$thiscolor: #4e4e4e;
+
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
-@import 'game';
 
-
-div {
-  border: 000 1px;
-}
-
-.box-1 {
-  background-color: $box1-bg;
-}
-
-.box-2 {
-  background-color: $box2-bg;
-}
-
-.box-3 {
-  background-color: $box3-bg;
-}
-
-.box-4 {
-  background-color: $box4-bg;
-}
-
-.box-5 {
-  background-color: $box5-bg;
-}
-
-.box-6 {
-  background-color: $box6-bg;
-}
-
-.box-7 {
-  background-color: $box7-bg;
-}
-
-.box-8 {
-  background-color: $box8-bg;
-}
-
-.box-9 {
-  background-color: $box9-bg;
+.main {
+  background-color: $pureblack;
+  border: $pureblack 2px;
 }

@@ -1,0 +1,55 @@
+.main {
+  background-color: #6EA8A9;
+  overflow: hidden;
+  width: 639px;
+  height:639px;
+  right :52%;
+  text-align: center;
+  margin: 17% auto;
+}
+
+.space {
+  height: 175px;
+  width: 175px;
+  float: left;
+  margin: 15px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-top: 18px;
+}
+
+.box-1 {
+  background-color: orange;
+}
+
+.box-2 {
+  background-color: blue;
+}
+
+.box-3 {
+  background-color: yellow;
+}
+
+.box-4 {
+  background-color: green;
+}
+
+.box-5 {
+  background-color: purple;
+}
+
+.box-6 {
+  background-color: grey;
+}
+
+.box-7 {
+  background-color: teal;
+}
+
+.box-8 {
+  background-color: pink;
+}
+
+.box-9 {
+  background-color: lavender;
+}

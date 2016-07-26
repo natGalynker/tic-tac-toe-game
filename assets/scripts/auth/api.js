@@ -2,17 +2,22 @@
  const app = require('../main');
 // keep eye on the names used as the form id. they correlate to the end points
 //that are being assigned to the url's value here.
-const signUp =  (data) => $.ajax({ //same as return $.ajax({
+const signUp =  function(data) {
+  console.log(data);
+return $.ajax({ //same as return $.ajax({
     url: app.api + '/sign-up',
     method: 'POST',
     data,
 });
-
-const signIn = (data) => $.ajax({
+};
+const signIn = function(data) {
+  console.log(data);
+return $.ajax({
   url: app.api + '/sign-in',
   method: 'POST',
   data,
 });
+};
 const changePassword = (data) => $.ajax({
   url: app.api + '/change-password/' + app.user.id,
   method: 'PATCH',
