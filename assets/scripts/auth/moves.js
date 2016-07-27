@@ -1,4 +1,13 @@
 'use strict';
+let boxVal1 = $('.box-1').text();
+let boxVal2 = $('.box-2').text();
+let boxVal3 = $('.box-3').text();
+let boxVal4 = $('.box-4').text();
+let boxVal5 = $('.box-5').text();
+let boxVal6 = $('.box-6').text();
+let boxVal7 = $('.box-7').text();
+let boxVal8 = $('.box-8').text();
+let boxVal9 = $('.box-9').text();
 let turnTracker = 0;
 let marker = ' ';
 let currentPlayer = ' ';
@@ -32,6 +41,8 @@ return marker;
 //         currentPlayer = player_o;
 //     }
 // };
+
+
 
 $(() => {
     $('.main').on('click', 'div', function(){
