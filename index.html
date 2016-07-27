@@ -52,9 +52,95 @@
             </form>
           </div>
         </div>
-
       </div>
     </div>
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="thisModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="thisModalLabel">Sign In</h4>
+          </div>
+          <div class="modal-body">
+            <div class= "input-group">
+              <form class="form-group" id="player-sign-in">
+                <input type="text" class="form-control sign-in"
+                name="credentials[player_name" placeholder="player name">
+                <input type="text" class="form-control email"
+                name="credentials[email]" placeholder="e-mail">
+                <input type="password" class="form-control password"
+                name="credentials[password]" placeholder="password">
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <input type="submit" class="play-button" name="submit" value="Play Game!">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="changePwModal" tabindex="-1" role="dialog" aria-labelledby="changeModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="changeModalLabel">Sign Up</h4>
+        </div>
+        <div class="modal-body">
+          <div class= "input-group">
+            <form class="form-group" id="player-change-pw">
+              <input type="text" class="form-control sign-in"
+              name="credentials[player_name" placeholder="player name">
+              <input type="text" class="form-control email"
+              name="credentials[email]" placeholder="e-mail">
+              <input type="password" class="form-control password"
+              name="credentials[password]" placeholder="password">
+              <input type="password" class="form-control confirm-pw"
+              name="credentials[password_confirmation]"
+              placeholder="confirm password">
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" class="change-password" name="submit" value="Update!">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="main">
+  <div class="box-1 space">
+    <p>Test</p>
+  </div>
+  <div class="box-2 space">
+    <p>Test</p>
+  </div>
+  <div class="box-3 space">
+    <p>Test</p>
+  </div>
+  <div class="box-4 space">
+    <p>Test</p>
+  </div>
+  <div class="box-5 space">
+    <p>Test</p>
+  </div>
+  <div class="box-6 space">
+    <p>Test</p>
+  </div>
+  <div class="box-7 space">
+    <p>Test</p>
+  </div>
+  <div class="box-8 space">
+    <p>Test</p>
+  </div>
+  <div class="box-9 space">
+    <p>Test</p>
+  </div>
+</div>
+</body>
+</html>
     <!-- <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -81,41 +167,8 @@
         </div>
       </div>
     </div>-->
-  </div>
+
       <!-- <h1>Example</h1>
-      <form id="sign-up">
-        <fieldset>
-          <legend>Sign up!</legend>
-          <input type="text" name="credentials[player_name"
-          placeholder="player name">
-          <input type="text" name="credentials[email]" placeholder="e-mail">
-          <input type="password" name="credentials[password]"
-          placeholder="password">
-          <input type="password" name="credentials[password_confirmation]"
-          placeholder="confirm password">
-          <input type="submit" name="submit" value="Sign up!">
-        </fieldset>
-      </form>
-      <form id="sign-in">
-        <fieldset>
-          <legend>Sign in!</legend>
-          <input type="text" name="credentials[email]" placeholder="e-mail">
-          <input type="password" name="credentials[password]"
-          placeholder="password">
-          <input type="text" name="credentials[player_name]"
-          placeholder="player">
-          <input type="submit" name="submit" value="Sign in!">
-        </fieldset>
-      </form>
-      <form id="change-password">
-        <fieldset>
-          <legend>Change password!</legend>
-          <input type="password" name="passwords[old]"
-          placeholder="old password">
-          <input type="password" name="passwords[new]"placeholder="new password">
-          <input type="submit" name="submit" value="Change Password!">
-        </fieldset>
-      </form>
       <form id="sign-out">
         <fieldset>
           <legend>Log Out!</legend>
@@ -136,34 +189,3 @@
           <input type="submit" name="submit" value="Update!">
         </fieldset>
       </form> -->
-      <div class="main">
-        <div class="box-1 space">
-          <p>Test</p>
-        </div>
-        <div class="box-2 space">
-          <p>Test</p>
-        </div>
-        <div class="box-3 space">
-          <p>Test</p>
-        </div>
-        <div class="box-4 space">
-          <p>Test</p>
-        </div>
-        <div class="box-5 space">
-          <p>Test</p>
-        </div>
-        <div class="box-6 space">
-          <p>Test</p>
-        </div>
-        <div class="box-7 space">
-          <p>Test</p>
-        </div>
-        <div class="box-8 space">
-          <p>Test</p>
-        </div>
-        <div class="box-9 space">
-          <p>Test</p>
-        </div>
-      </div>
-    </body>
-</html>

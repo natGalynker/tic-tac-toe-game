@@ -43,9 +43,9 @@ const changePlayer = (data) => $.ajax({
 });
 const newGame = (data) => $.ajax({
   url: app.api+ '/games',
-  method: 'POST',
+  method: 'POST' + '{}',
   headers: {
-    Authorization: 'Token token='+ app.game.token,
+    Authorization: 'Token token='+ app.user.token,
   },
   data,
 });

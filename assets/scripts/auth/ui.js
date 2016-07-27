@@ -32,3 +32,28 @@ module.exports = {
   signInSuccess,
   signOutSuccess
 };
+// $(() => {
+// $('#signUpModal').on('click', function () {
+//   $('#signUp').modal('show');
+//
+// });
+// $('.sign-button').on('click', function() {
+//   $('#signUp').modal('hide');
+//
+//
+// $('#signInModal').on('click', function () {
+//   $('#signIn').modal('show');
+//
+// });
+// $('.play-button').on('click', function() {
+//   $('#signIn').modal('hide');
+//
+// $('#changePwModal').on('click', function () {
+// $('#changePw').modal('show');
+// });
+// $('.change-password').on('click', function() {
+// $('#changePw').modal('hide');
+// });
+// });
+//
+// });

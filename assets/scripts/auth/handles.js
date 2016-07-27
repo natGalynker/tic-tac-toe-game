@@ -47,17 +47,18 @@ const onNewGame = function (event) {
 };
 const addHandlers = () => {
   $('#player-sign-up').on('submit', onSignUp);
-  $('#sign-in').on('submit', onSignIn); //grab element from the dom with element
-  $('#change-password').on('submit', onChangePassword);
+  $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element
+  $('#player-change-pw').on('submit', onChangePassword);
   $('#sign-out').on('submit', onSignOut);    //id on sign-up. Then does something
   $('#change-player').on('submit', onChangePlayer);  //with the id it grabbed.
   $('#new-game').on('click', onNewGame);
 
+
 };
 $(() => {
-  $('.space').on('click', function(){
-    console.log('it clicked!');
-  });
+  // $('.space').on('click', function(){
+  //   console.log('it clicked!');
+  // });
 
 
 });

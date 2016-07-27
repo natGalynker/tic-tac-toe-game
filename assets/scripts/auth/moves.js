@@ -1,45 +1,118 @@
 'use strict';
+let turnTracker = 0;
+let marker = ' ';
+let currentPlayer = ' ';
+let board = ["box-1", "box-2", "box-3", "box-4", "box-5", "box-6", "box-7",
+            "box-8", "box-9"];
+
+const swapPlayer = function(){
+  if(turnTracker % 2 === 0) {
+    currentPlayer = "Player X";
+    marker = "X";
+    turnTracker++;
+} else {
+  currentPlayer = "Player O";
+  marker =  "O";
+  turnTracker++;
+}
+console.log(marker);
+return marker;
+};
+
+// const setMove = function (event) {
+//   event.preventDefault();
+//   $(this).text(currentPlayer);
+  // let id = $(this).attr('class');
+  // console.log(id);
+  // return id;
+// let swapPlayer = function() {
+//     if (currentPlayer === player_x) {
+//         currentPlayer = player_o;
+//     } else {
+//         currentPlayer = player_o;
+//     }
+// };
+
+$(() => {
+    $('.main').on('click', 'div', function(){
+      if($(this).text() !== "X" && $(this).text() !== "O") {
+        $(this).text(marker);
+          console.log(marker);
+             swapPlayer();
+           }
+        });
+     return true;
+});
+// let player_x;
+// let player_o;
+// let currentPlayer;
+// let ifClicked = function(currentPlayer){
+//     currentPlayer = player_o
+//   ifClicked();
+// $(() => {
+// $('.space').on('click', function(){
+//     $(this).html('o');
+//     console.log("click");
+//   });
+//   return true;
+// });
+// };
+// let playerClick = function(){
+//
+//   playerClick()
+//
+// if (currentPlayer === player_x){
+//   return playerClick;
+// }else{
+//   return player_o;
+// }
+//
+// };
+
+
 //need to see if the space is available
 //if it is available set a boolean to it
 //where the boolean determines whose turn it is
 //if one of the booleans is true change the value of that
 //space to the marker of that player.
-let box = [0, 1, 2, 3, 4, 5, 6 ,7 8];
+//check to see if there are available boxes
+//if game is done endGame.
+//test for x win
+//test for y win
+//test for draw
+//button that will refresh the board.
 
-let player1 = player_o;
-let player2 = player_x;
-
-const turnClick = function(ifAvailable, box){
-  for (let i = 0; i < box.length; i++) {
-    
-  }
-}
 //
-let players = ['player-x', 'player-o'];
-let player = '';
+// let players = ['player-x', 'player-o'];
+// let player = '';
+//
+//   $('.space').on('click', function(){
+//   let currentCell = $(this);
+//     if (turnClick % 2 === 0) {
+//       player = players[0];
+//     } else {
+//       player = players[1];
+//     }
+//     console.log(turnClick);
+// });
+//
+// $('.box').on('click', function(){
+//   let currentCell = $(this);
+//   if (currentCell.hasClass('available')) {
+//     currentCell.removeClass('available');
+//     currentCell.addClass('player');
+//   if (player === 'player-x') {
+//     currentCell.addClass('player-x');
+//       turnClick++;
+//   }else {
+//     currentCell.addClass('player-o');
+//       turnClick++;
+//     }
+//   }
+//   }
+// );
 
-  $('.space').on('click', function(){
-  let currentCell = $(this);
-    if (turnClick % 2 === 0) {
-      player = players[0];
-    } else {
-      player = players[1];
-    }
-    console.log(turnClick);
-});
+module.exports = {
+  swapPlayer,
 
-$('.box').on('click', function(){
-  let currentCell = $(this);
-  if (currentCell.hasClass('available')) {
-    currentCell.removeClass('available');
-    currentCell.addClass('player');
-  if (player === 'player-x') {
-    currentCell.addClass('player-x');
-      turnClick++;
-  }else {
-    currentCell.addClass('player-o');
-      turnClick++;
-    }
-  }
-  }
-);
+};

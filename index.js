@@ -5,8 +5,9 @@
 
 // load manifests
 // scripts
-require('./assets/scripts/index.js');
 
+require('./assets/scripts/index.js');
+require('./assets/scripts/auth/moves.js');
 // styles
 require('./assets/styles/index.scss');
 

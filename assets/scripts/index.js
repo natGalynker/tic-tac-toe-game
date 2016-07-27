@@ -6,7 +6,6 @@ const authEvents = require('./auth/handles.js');
 //webpack is the template we use. It turns everything into one gigantic
 //javascript file.
 // On document ready
-$(() => {
 //   $('#signUpModal').on('click', function () {
 //     $('#signUpModal').modal('show');
 //     $('.this-test-modal').on('click', function(){
@@ -31,11 +30,3 @@ $(() => {
   //    });
   // });
   authEvents.addHandlers(); //whatever is in here is what gets run
-  $('#signUpModal').on('click', function () {
-    $('#signUp').modal('show');
-
-});
-  $('.sign-button').on('click', function() {
-    $('#signUp').modal('hide');
-  });
-});
