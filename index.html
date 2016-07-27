@@ -1,51 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Example</title>
-      <script src="vendor.bundle.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="bundle.js" type="text/javascript" charset="utf-8" defer></script>
-      <link rel="stylesheet" href="/assets/styles/index.css" charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
+<head>
+  <title>Example</title>
+  <script src="vendor.bundle.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="bundle.js" type="text/javascript" charset="utf-8" defer></script>
+  <link rel="stylesheet" href="/assets/styles/index.css" charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-    <body>
-      <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#mySignUpModal">Sign UP</button>
-      <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#mySignInModal">Sign In</button>
-      <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#myChangePwModal">Change Password</button>
-      <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#myChangePlayerModal">Change Player</button>
-      <a class="navbar-brand" href="#">Tic Tac Toe</a>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#signUpModal">Sign UP</button>
+        <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#signInModal">Sign In</button>
+        <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#changePwModal">Change Password</button>
+        <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#changePlayerModal">Change Player</button>
+        <a class="navbar-brand" href="#">Tic Tac Toe</a>
+      </div>
     </div>
-  </div>
-</nav>
-<div class="modal fade" id="test-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+  </nav>
+  <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+        </div>
+        <div class="modal-body">
+          <div class= "input-group">
+            <form class="form-group" id="player-sign-up">
+              <input type="text" class="form-control sign-in"
+              name="credentials[player_name" placeholder="player name">
+              <input type="text" class="form-control email"
+              name="credentials[email]" placeholder="e-mail">
+              <input type="password" class="form-control password"
+              name="credentials[password]" placeholder="password">
+              <input type="password" class="form-control confirm-pw"
+              name="credentials[password_confirmation]"
+              placeholder="confirm password">
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" class="sign-button" name="submit" value="Sign up!">
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
           <div class="modal-header">
-             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-             <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
           </div>
           <div class="modal-body">
-            <div class="input-group">
-               <span class="input-group-addon" id="test-msg">test</span>
-               <input type="text" class="test-message form-control" placeholder="Message to log" aria-describedby="test-msg">
+            <div class= "input-group">
+              <form class="form-group" id="signInModal">
+                <input type="text" class="form-control email"
+                name="credentials[email]" placeholder="e-mail">
+                <input type="password" class="form-control password"
+                name="credentials[password]" placeholder="password">
+                <input type="text" class="form-control sign-in"
+                name="credentials[player_name" placeholder="player name">
+              </form>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="this-test-modal btn btn-primary">save</button>
+            <button type="button" class="this-test-modal btn btn-primary">Play Game!</button>
           </div>
+        </div>
       </div>
+    </div>-->
   </div>
-</div>
       <!-- <h1>Example</h1>
       <form id="sign-up">
         <fieldset>

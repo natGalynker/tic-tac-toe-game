@@ -1,5 +1,4 @@
 .main {
-  background-color: #6EA8A9;
   overflow: hidden;
   width: 639px;
   height:639px;
@@ -9,6 +8,7 @@
 }
 
 .space {
+  background-color: lavender;
   height: 175px;
   width: 175px;
   float: left;
@@ -18,7 +18,7 @@
   margin-top: 18px;
 }
 
-.box-1 {
+/*.box-1 {
   background-color: orange;
 }
 
@@ -52,4 +52,4 @@
 
 .box-9 {
   background-color: lavender;
-}
+}*/

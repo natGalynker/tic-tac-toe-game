@@ -6,7 +6,9 @@ const app = require('../main'); //put it in app because there isnt any real code
                         //among all the different files that depend on that data
 
 const success = (data) => {
+  if(data){
   console.log(data);
+}
 };
 
 const failure = (error) => {

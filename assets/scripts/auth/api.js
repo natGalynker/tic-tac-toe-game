@@ -14,7 +14,7 @@ const signIn = function(data) {
   console.log(data);
 return $.ajax({
   url: app.api + '/sign-in',
-  method: 'POST',
+  method: 'POST' + '{}',
   data,
 });
 };
@@ -41,10 +41,20 @@ const changePlayer = (data) => $.ajax({
   },
   data,
 });
+const newGame = (data) => $.ajax({
+  url: app.api+ '/games',
+  method: 'POST',
+  headers: {
+    Authorization: 'Token token='+ app.game.token,
+  },
+  data,
+});
+
 module.exports = {
   signUp,
   signIn,
   changePassword,
   signOut,
   changePlayer,
+  newGame,
 };
