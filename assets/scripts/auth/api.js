@@ -19,7 +19,7 @@ return $.ajax({
 });
 };
 const changePassword = (data) => $.ajax({
-  url: app.api + '/change-password/' + app.user.id,
+  url: app.api + '/change-password' + app.user.id,
   method: 'PATCH',
   headers: {
     Authorization: 'Token token=' + app.user.token,
@@ -34,7 +34,7 @@ const signOut = () => $.ajax({
   },
 });
 const changePlayer = (data) => $.ajax({
-  url: app.api + '/change-player/' + app.user.id,
+  url: app.api + '/change-player' + app.user.id,
   method: 'PATCH',
   headers: {
     Authorization: 'Token token=' +app.user.token,
