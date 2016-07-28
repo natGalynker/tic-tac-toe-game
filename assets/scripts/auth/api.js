@@ -10,24 +10,50 @@ return $.ajax({ //same as return $.ajax({
     data,
 });
 };
-const signIn = function(data) {
+const signIn = function (data) {
   console.log(data);
-return $.ajax({
-  url: app.api + '/sign-in',
-  method: 'POST' + '{}',
-  data,
+  return $.ajax({
+    url: app.api + '/sign-in',
+    method: 'POST',
+    data,
 });
 };
-const changePassword = (data) => $.ajax({
-  url: app.api + '/change-password' + app.user.id,
+const index = function () {
+  return $.ajax({
+    url: app.api + '/games',
+    method: 'GET',
+  });
+};
+
+const show = function (gameId) {
+  return $.ajax({
+    url: app.api + '/games/' + gameId,
+    method: 'GET',
+  });
+};
+
+// const createGame= function () {
+//   return $.ajax({
+//     url: app.api + '/games',
+//     method: 'POST' + '{}',
+//     Authorization: 'Token token=' + app.user.token,
+//   },
+//     data,
+// });
+const changePassword = function (data) {
+  console.log(data);
+  console.log(app.user.token);
+  return $.ajax({
+  url: app.api + '/change-password/'  + app.user.id,
   method: 'PATCH',
   headers: {
     Authorization: 'Token token=' + app.user.token,
   },
     data,
 });
+};
 const signOut = () => $.ajax({
-  url: app.api +'/sign-out' + app.user.id,
+  url: app.api +'/sign-out/' + app.user.id,
   method: 'DELETE',
   headers: {
     Authorization: 'Token token=' + app.user.token,
@@ -57,4 +83,7 @@ module.exports = {
   signOut,
   changePlayer,
   newGame,
+  // createGame,
+  index,
+  show,
 };

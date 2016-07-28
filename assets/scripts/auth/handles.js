@@ -19,12 +19,28 @@ const onSignIn = function (event) {
   .done(ui.signInSuccess)
   .fail(ui.failure);
 };
+
 const onChangePassword = function onChangePassword(event) {
   let data = getFormFields(this);
+  console.log(data);
   event.preventDefault();
   api.changePassword(data)
   .done(ui.success)
   .fail(ui.failure);
+};
+const onGetGames = function (event) {
+  event.preventDefault();
+  let gameId = ('#game-id').val();
+
+ if (gameId.length === 0) {
+api.index()
+.done(ui.onSuccess)
+ .fail(ui.onError);
+ } else {
+api.show(gameId)
+.done(ui.onSuccess)
+.fail(ui.onError);
+}
 };
 const onSignOut = function onSignOut(event) {
   event.preventDefault();
@@ -48,10 +64,14 @@ const onNewGame = function (event) {
 const addHandlers = () => {
   $('#player-sign-up').on('submit', onSignUp);
   $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element
-  $('#player-change-pw').on('submit', onChangePassword);
+  $('#change-password').on('submit', onChangePassword);
   $('#sign-out').on('submit', onSignOut);    //id on sign-up. Then does something
   $('#change-player').on('submit', onChangePlayer);  //with the id it grabbed.
-  $('#new-game').on('click', onNewGame);
+  $('#newGame').on('click', onNewGame);
+  // $('#showGame').on('click', onShowGame);
+  // $('#updateGame').on('click', onUpdateGame);
+  $('#indexGame').on('click', onGetGames);
+
 
 
 };
@@ -64,6 +84,8 @@ $(() => {
 });
 module.exports = {
   addHandlers,
+  // onGetGames,
+
 //only use module.exports on variables which are needed to be accessed outside
 //of that file
 };
