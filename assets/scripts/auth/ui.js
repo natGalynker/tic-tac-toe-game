@@ -15,6 +15,11 @@ const failure = (error) => {
   console.error(error);
 };
 
+const newGameSuccess = (data) => {
+  app.game = data.game;
+  console.log(app);
+};
+
 const signInSuccess = (data) =>{
   app.user = data.user; //can use app.user or app.token. we know this because the
   console.log(app);     //console in browser told us that we have the key user
@@ -30,5 +35,6 @@ module.exports = {
   failure,
   success,
   signInSuccess,
-  signOutSuccess
+  signOutSuccess,
+  newGameSuccess
 };

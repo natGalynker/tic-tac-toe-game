@@ -25,7 +25,7 @@
         <a class="navbar-brand" href="#">Tic Tac Toe</a>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#Update" class="navbar-nav pull-right">Update Game</a></li>
+            <li><a href="#Update" id="updateGame" class="navbar-nav pull-right">Update Game</a></li>
             <li><a href="#Create" class="navbar-nav pull-right">Create Game form<input name="game[cell][index]" class="newGame" type="text" style="display: none"></a></li>
             <li><a href="#Get" class="navbar-nav pull-right">Get Game<input name="game[cell][index]" id="game-id" class="index" type="text" style="display: none"></a></li>
             <li><a href="#Get" class="navbar-nav pull-right">Show Game<input name="game[cell][index]" id="user" class="show" type="text" style="display: none"></a></li>
@@ -100,7 +100,7 @@
               <input type="password" class="form-control password"
               name="credentials[password]" placeholder="password">
               <input type="text" class="form-control player-name"
-              name="credentials[player_name]" placeholder="confirm password">
+              name="credentials[player_name]" placeholder="Player Name">
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <input type="submit" class="player-sign-in" name="submit" value="Sign In">
@@ -121,7 +121,7 @@
   </div>
   <h1><span class="wining"></span></h1>
   <form class="form-group" id="new-game">
-    <input type="submit" class="new-game" name="submit" value="Play again">
+    <input type="submit" class="new-game" name="submit" value="Play Game">
   </form>
 <div class="main">
   <div data-number="0" class= "box-1 space">

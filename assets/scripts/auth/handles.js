@@ -1,7 +1,7 @@
 'use strict';
 const getFormFields = require(`../../../lib/get-form-fields`);
 
-
+const moves = require('./moves');
 const api = require('./api');
 const ui = require('./ui');
 
@@ -58,20 +58,28 @@ const onChangePlayer = function onChangePlayer(event) {
 
 const onNewGame = function (event) {
   event.preventDefault();
-  api.createGame()
-  .done(ui.success)
+  api.newGame()
+  .done(ui.newGameSuccess)
   .fail(ui.failure);
 };
+const onUpdateGame = function (event) {
+  let data = moves(this);
+  event.preventDefault();
+  api.updateGame(data)
+  .done(ui.success)
+  .fail(ui.failure);
 
+};
 const addHandlers = () => {
   $('#player-sign-up').on('submit', onSignUp);
   $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element
   $('#change-password').on('submit', onChangePassword);
   $('#sign-out').on('submit', onSignOut);    //id on sign-up. Then does something
   $('#change-player').on('submit', onChangePlayer);  //with the id it grabbed.
-  $('#newGame').on('click', onNewGame);
+  $('.new-game').on('click', onNewGame);
+  $('.space').on('click', onUpdateGame);
   // $('#showGame').on('click', onShowGame);
-  // $('#updateGame').on('click', onUpdateGame);
+  $('#updateGame').on('click', onUpdateGame);
   $('#indexGame').on('click', onGetGames);
 
 

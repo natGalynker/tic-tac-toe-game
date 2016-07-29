@@ -67,13 +67,20 @@ const changePlayer = (data) => $.ajax({
   },
   data,
 });
-const newGame = (data) => $.ajax({
-  url: app.api+ '/games',
-  method: 'POST' + '{}',
+const updateGame = (data) => $.ajax({
+  url: app.api+ '/games/' + app.game.id,
+  method: 'PATCH',
   headers: {
-    Authorization: 'Token token='+ app.user.token,
+    Authorization: 'Token token=' + app.user.token,
   },
   data,
+})
+const newGame = () => $.ajax({
+  url: app.api+ '/games/',
+  method: 'POST',
+  headers: {
+    Authorization: 'Token token=' + app.user.token,
+  },
 });
 
 module.exports = {
@@ -83,7 +90,7 @@ module.exports = {
   signOut,
   changePlayer,
   newGame,
-  // createGame,
   index,
   show,
+  updateGame,
 };
