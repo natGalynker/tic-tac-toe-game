@@ -231,12 +231,13 @@ webpackJsonp([0],[
 	var marker = ' ';
 	var win = false;
 	var index = void 0;
+	var draw = void 0;
 	var currentPlayer = ' ';
 	var boardArray = [[false, false, false], [false, false, false], [false, false, false]];
 
 	var checkForDraw = function checkForDraw() {
-		var draw = false;
-		if (turnTracker == 9 && !win) {
+		draw = false;
+		if (turnTracker === 9 && !win) {
 			draw = true;
 			console.log("It's a tie!");
 		}
@@ -246,7 +247,7 @@ webpackJsonp([0],[
 		console.log(boardArray);
 		if (marker === boardArray[0] && marker === boardArray[1] && marker === boardArray[2] || marker === boardArray[3] && marker === boardArray[4] && marker === boardArray[5] || marker === boardArray[6] && marker === boardArray[7] && marker === boardArray[8] || marker === boardArray[0] && marker === boardArray[3] && marker === boardArray[6] || marker === boardArray[1] && marker === boardArray[4] && marker === boardArray[7] || marker === boardArray[2] && marker === boardArray[5] && marker === boardArray[8] || marker === boardArray[0] && marker === boardArray[4] && marker === boardArray[8] || marker === boardArray[2] && marker === boardArray[4] && marker === boardArray[6]) {
 			win = true;
-			console.log("winner is" + currentPlayer);
+			console.log("winner is " + marker);
 		}
 
 		return win;
@@ -299,7 +300,7 @@ webpackJsonp([0],[
 		//console.log(index);
 		//   marker = index;
 		//   console.log(index);
-		//   console.log(currentPlayer);
+		console.log(currentPlayer);
 		// check the board to see if it's free.  Always returning true for now
 		//console.log("Checking square "+index);
 		return true;
@@ -336,18 +337,21 @@ webpackJsonp([0],[
 
 				// see if we're done
 				if (checkForWin()) {
-					$('h1').text("Winner is" + " " + currentPlayer);
-					console.log("winner is" + currentPlayer); // flag that the game is done and this player won, somehow
+					$('h1').text("Winner is player" + " " + marker);
+					console.log("winner is player " + " " + marker); // flag that the game is done and this player won, somehow
 				} else if (checkForDraw()) {
+					draw = true;
 					$('h1').text("It's a Cats Game!");
 
 					//console.log("draw");
 					// flag that it's a draw, somehow
 				} else {
-					// game is still going
+					// 	// game is still going
 					swapPlayer();
+					// }
 				}
 			}
+			// });
 		});
 	});
 	module.exports = {
