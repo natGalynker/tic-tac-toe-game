@@ -11,7 +11,7 @@ webpackJsonp([0],[
 	// scripts
 
 	__webpack_require__(1);
-	__webpack_require__(8);
+	__webpack_require__(5);
 	// styles
 	__webpack_require__(9);
 
@@ -70,8 +70,9 @@ webpackJsonp([0],[
 
 	var getFormFields = __webpack_require__(4);
 
-	var api = __webpack_require__(5);
-	var ui = __webpack_require__(7);
+	var moves = __webpack_require__(5);
+	var api = __webpack_require__(6);
+	var ui = __webpack_require__(8);
 
 	var onSignUp = function onSignUp(event) {
 	  var data = getFormFields(this);
@@ -112,18 +113,23 @@ webpackJsonp([0],[
 
 	var onNewGame = function onNewGame(event) {
 	  event.preventDefault();
-	  api.createGame().done(ui.success).fail(ui.failure);
+	  api.newGame().done(ui.newGameSuccess).fail(ui.failure);
 	};
-
+	var onUpdateGame = function onUpdateGame(event) {
+	  var data = moves(this);
+	  event.preventDefault();
+	  api.updateGame(data).done(ui.success).fail(ui.failure);
+	};
 	var addHandlers = function addHandlers() {
 	  $('#player-sign-up').on('submit', onSignUp);
 	  $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element
 	  $('#change-password').on('submit', onChangePassword);
 	  $('#sign-out').on('submit', onSignOut); //id on sign-up. Then does something
 	  $('#change-player').on('submit', onChangePlayer); //with the id it grabbed.
-	  $('#newGame').on('click', onNewGame);
+	  $('.new-game').on('click', onNewGame);
+	  $('.space').on('click', onUpdateGame);
 	  // $('#showGame').on('click', onShowGame);
-	  // $('#updateGame').on('click', onUpdateGame);
+	  $('#updateGame').on('click', onUpdateGame);
 	  $('#indexGame').on('click', onGetGames);
 	};
 	$(function () {
@@ -220,7 +226,146 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var app = __webpack_require__(6);
+	var handles = __webpack_require__(2);
+	var turnTracker = 0;
+	var marker = ' ';
+	var win = false;
+	var index = void 0;
+	var currentPlayer = ' ';
+	var boardArray = [[false, false, false], [false, false, false], [false, false, false]];
+
+	var checkForDraw = function checkForDraw() {
+		var draw = false;
+		if (turnTracker == 9 && !win) {
+			draw = true;
+			console.log("It's a tie!");
+		}
+	};
+	var checkForWin = function checkForWin() {
+		var win = false;
+		console.log(boardArray);
+		if (marker === boardArray[0] && marker === boardArray[1] && marker === boardArray[2] || marker === boardArray[3] && marker === boardArray[4] && marker === boardArray[5] || marker === boardArray[6] && marker === boardArray[7] && marker === boardArray[8] || marker === boardArray[0] && marker === boardArray[3] && marker === boardArray[6] || marker === boardArray[1] && marker === boardArray[4] && marker === boardArray[7] || marker === boardArray[2] && marker === boardArray[5] && marker === boardArray[8] || marker === boardArray[0] && marker === boardArray[4] && marker === boardArray[8] || marker === boardArray[2] && marker === boardArray[4] && marker === boardArray[6]) {
+			win = true;
+			console.log("winner is" + currentPlayer);
+		}
+
+		return win;
+	};
+
+	var swapPlayer = function swapPlayer() {
+		//index = parseInt($(this).data('number'));
+		// turnTracker = 0;
+		// $('.space').text(' ');
+		// $('.space').on('click', function(){
+		//   $(this).off();
+		if (turnTracker % 2 === 0) {
+			currentPlayer = "Player x";
+			marker = "x";
+			boardArray[index] = "x";
+			turnTracker++;
+		} else {
+			currentPlayer = "Player o";
+			marker = "o";
+			boardArray[index] = "o";
+			turnTracker++;
+		}
+		// });
+	};
+	var setGame = function setGame() {
+		// empty board
+		boardArray = [];
+		boardArray[0] = null;
+		boardArray[1] = null;
+		boardArray[2] = null;
+		boardArray[3] = null;
+		boardArray[4] = null;
+		boardArray[5] = null;
+		boardArray[6] = null;
+		boardArray[7] = null;
+		boardArray[8] = null;
+
+		// set the first player
+		// currentPlayer = "Player o";
+		// marker = "o";
+		$('.refresh-game').on('click', function () {
+			$('.refresh-game').on('submit', setGame);
+		}
+		// should probably clear the ui too, just in case.
+
+		);
+	};
+	var isSquareFree = function isSquareFree(index) {
+		boardArray[index] = marker;
+		//console.log(index);
+		//   marker = index;
+		//   console.log(index);
+		//   console.log(currentPlayer);
+		// check the board to see if it's free.  Always returning true for now
+		//console.log("Checking square "+index);
+		return true;
+		// }
+	};
+	var markSquare = function markSquare(index) {
+		// mark this square as taken on the board.
+		console.log("Marking square " + index);
+	};
+
+	$(function () {
+
+		// init the game board
+
+		setGame();
+
+		$('.main').on('click', 'div', function () {
+
+			//console.log($(this).data());
+			// get the id of the clicked div.  This is the square.
+			// Is that what this line does?
+			// let index = parseInt($(this).data('number', 10));
+			//	console.log("Clicked square representing index "+index);
+
+			index = parseInt($(this).data('number'));
+			//console.log(index);
+			// see if the clicked square is free
+			if (isSquareFree(index)) {
+				// mark the square as taken by this player
+				markSquare(index);
+
+				// update the UI
+				$(this).text(marker);
+
+				// see if we're done
+				if (checkForWin()) {
+					$('h1').text("Winner is" + " " + currentPlayer);
+					console.log("winner is" + currentPlayer); // flag that the game is done and this player won, somehow
+				} else if (checkForDraw()) {
+					$('h1').text("It's a Cats Game!");
+
+					//console.log("draw");
+					// flag that it's a draw, somehow
+				} else {
+					// game is still going
+					swapPlayer();
+				}
+			}
+		});
+	});
+	module.exports = {
+		swapPlayer: swapPlayer,
+		checkForDraw: checkForDraw,
+		checkForWin: checkForWin,
+		setGame: setGame,
+		handles: handles
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var app = __webpack_require__(7);
 	// keep eye on the names used as the form id. they correlate to the end points
 	//that are being assigned to the url's value here.
 	var signUp = function signUp(data) {
@@ -292,14 +437,23 @@ webpackJsonp([0],[
 	    data: data
 	  });
 	};
-	var newGame = function newGame(data) {
+	var updateGame = function updateGame(data) {
 	  return $.ajax({
-	    url: app.api + '/games',
-	    method: 'POST' + '{}',
+	    url: app.api + '/games/' + app.game.id,
+	    method: 'PATCH',
 	    headers: {
 	      Authorization: 'Token token=' + app.user.token
 	    },
 	    data: data
+	  });
+	};
+	var newGame = function newGame() {
+	  return $.ajax({
+	    url: app.api + '/games/',
+	    method: 'POST',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    }
 	  });
 	};
 
@@ -310,20 +464,20 @@ webpackJsonp([0],[
 	  signOut: signOut,
 	  changePlayer: changePlayer,
 	  newGame: newGame,
-	  // createGame,
 	  index: index,
-	  show: show
+	  show: show,
+	  updateGame: updateGame
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 6 */,
-/* 7 */
+/* 7 */,
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var app = __webpack_require__(6); //put it in app because there isnt any real code
+	var app = __webpack_require__(7); //put it in app because there isnt any real code
 	// we do this to avoid circular dependency
 	//this way we can share data from one file and share
 	//among all the different files that depend on that data
@@ -336,6 +490,11 @@ webpackJsonp([0],[
 
 	var failure = function failure(error) {
 	  console.error(error);
+	};
+
+	var newGameSuccess = function newGameSuccess(data) {
+	  app.game = data.game;
+	  console.log(app);
 	};
 
 	var signInSuccess = function signInSuccess(data) {
@@ -353,138 +512,9 @@ webpackJsonp([0],[
 	  failure: failure,
 	  success: success,
 	  signInSuccess: signInSuccess,
-	  signOutSuccess: signOutSuccess
+	  signOutSuccess: signOutSuccess,
+	  newGameSuccess: newGameSuccess
 	};
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
-	var handles = __webpack_require__(2);
-	var turnTracker = 0;
-	var marker = ' ';
-	var win = false;
-	var index = void 0;
-	var currentPlayer = ' ';
-	var boardArray = [[false, false, false], [false, false, false], [false, false, false]];
-
-	var checkForDraw = function checkForDraw() {
-		var draw = false;
-		if (turnTracker >= 8 && win !== true) {
-			draw = true;
-			console.log("It's a tie!");
-		}
-	};
-	var checkForWin = function checkForWin() {
-		var win = false;
-		console.log(currentPlayer);
-		console.log(boardArray);
-		if (marker === boardArray[0] && marker === boardArray[1] && marker === boardArray[2] || marker === boardArray[3] && marker === boardArray[4] && marker === boardArray[5] || marker === boardArray[6] && marker === boardArray[7] && marker === boardArray[8] || marker === boardArray[0] && marker === boardArray[3] && marker === boardArray[6] || marker === boardArray[1] && marker === boardArray[4] && marker === boardArray[7] || marker === boardArray[2] && marker === boardArray[5] && marker === boardArray[8] || marker === boardArray[0] && marker === boardArray[4] && marker === boardArray[8] || marker === boardArray[2] && marker === boardArray[4] && marker === boardArray[6]) {
-			win = true;
-			console.log("winner is" + currentPlayer);
-		}
-
-		return win;
-	};
-
-	var swapPlayer = function swapPlayer() {
-		// index = parseInt($(this).data('number'));
-		if (turnTracker % 2 === 0) {
-			currentPlayer = "Player x";
-			marker = "x";
-			boardArray[index] = "x";
-			turnTracker++;
-		} else {
-			currentPlayer = "Player o";
-			marker = "o";
-			boardArray[index] = "o";
-			turnTracker++;
-		}
-	};
-
-	var setGame = function setGame() {
-		// empty board
-		boardArray = [];
-		boardArray[0] = null;
-		boardArray[1] = null;
-		boardArray[2] = null;
-		boardArray[3] = null;
-		boardArray[4] = null;
-		boardArray[5] = null;
-		boardArray[6] = null;
-		boardArray[7] = null;
-		boardArray[8] = null;
-
-		// set the first player
-		currentPlayer = "Player o";
-		marker = "o";
-
-		// should probably clear the ui too, just in case.
-	};
-
-	var isSquareFree = function isSquareFree(index) {
-		boardArray[index] = marker;
-		console.log(index);
-		//   marker = index;
-		//   console.log(index);
-		//   console.log(currentPlayer);
-		// check the board to see if it's free.  Always returning true for now
-		console.log("Checking square " + index);
-		return true;
-		// }
-	};
-	var markSquare = function markSquare(index) {
-		// mark this square as taken on the board.
-		console.log("Marking square " + index);
-	};
-
-	$(function () {
-
-		// init the game board
-		setGame();
-
-		$('.main').on('click', 'div', function () {
-
-			console.log($(this).data());
-			// get the id of the clicked div.  This is the square.
-			// Is that what this line does?
-			// let index = parseInt($(this).data('number', 10));
-			console.log("Clicked square representing index " + index);
-
-			index = parseInt($(this).data('number'));
-			console.log(index);
-			// see if the clicked square is free
-			if (isSquareFree(index)) {
-				// mark the square as taken by this player
-				markSquare(index);
-
-				// update the UI
-				$(this).text(marker);
-
-				// see if we're done
-				if (checkForWin()) {
-					$('h1').text("Winner is" + " " + currentPlayer);
-					console.log("winner is" + currentPlayer); // flag that the game is done and this player won, somehow
-				} else if (checkForDraw()) {
-					console.log("draw");
-					// flag that it's a draw, somehow
-				} else {
-					// game is still going
-					swapPlayer();
-				}
-			}
-		});
-	});
-	module.exports = {
-		swapPlayer: swapPlayer,
-		checkForDraw: checkForDraw,
-		checkForWin: checkForWin,
-		setGame: setGame,
-		handles: handles
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 9 */

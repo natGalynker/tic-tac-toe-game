@@ -71,8 +71,8 @@ const setGame = function(){
 	// set the first player
 	// currentPlayer = "Player o";
 	// marker = "o";
-  $('.new-game').on('click', function(){
-  $('.new-game').on('submit', setGame);
+  $('.refresh-game').on('click', function(){
+  $('.refresh-game').on('submit', setGame);
 }
 	// should probably clear the ui too, just in case.
 
