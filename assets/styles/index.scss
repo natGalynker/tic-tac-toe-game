@@ -1,14 +1,27 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+$lavender: #e6e6fa;
 
-$box1-bg: #fff000;
-$box2-bg: #00ff7f;
-$box3-bg: #3bb9ff;
-$box4-bg: #d84c00;
-$box5-bg: #ffce3d;
-$box6-bg: #298487;
-$box7-bg: #fc9c3a;
-$box8-bg: #224f41;
-$box9-bg: #c8a2c8;
-$pureblack: #000;
-$thiscolor: #4e4e4e;
+.main {
+  height: 639px;
+  margin: 17% auto;
+  overflow: hidden;
+  right: 52%;
+  text-align: center;
+  width: 639px;
+}
+
+.space {
+  background-color: $lavender;
+  float: left;
+  height: 175px;
+  margin: 15px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-top: 18px;
+  width: 175px;
+}
+
+h1 {
+  font-size: 20px;
+}

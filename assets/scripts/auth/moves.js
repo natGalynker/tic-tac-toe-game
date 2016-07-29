@@ -130,5 +130,6 @@ $(() => {
   swapPlayer,
   checkForDraw,
   checkForWin,
-  setGame
+  setGame,
+  handles
 };
