@@ -21,10 +21,10 @@ const signInSuccess = (data) =>{
                         //even though we did not define one. User contains the
   };                      //token that we care about
 
-const signOutSuccess = () =>{
-  app.user = app.user;
-  console.log(app);
-};
+  const signOutSuccess = () =>{
+    delete app.user;
+    console.log(app);
+  };
 
 module.exports = {
   failure,
@@ -32,28 +32,3 @@ module.exports = {
   signInSuccess,
   signOutSuccess
 };
-// $(() => {
-// $('#signUpModal').on('click', function () {
-//   $('#signUp').modal('show');
-//
-// });
-// $('.sign-button').on('click', function() {
-//   $('#signUp').modal('hide');
-//
-//
-// $('#signInModal').on('click', function () {
-//   $('#signIn').modal('show');
-//
-// });
-// $('.play-button').on('click', function() {
-//   $('#signIn').modal('hide');
-//
-// $('#changePwModal').on('click', function () {
-// $('#changePw').modal('show');
-// });
-// $('.change-password').on('click', function() {
-// $('#changePw').modal('hide');
-// });
-// });
-//
-// });

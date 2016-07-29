@@ -1,6 +1,8 @@
 'use strict';
 let turnTracker = 0;
 let marker = ' ';
+let win = false;
+let index;
 let currentPlayer = ' ';
 let boardArray = [[false, false, false],
                  [false, false, false],
@@ -9,15 +11,15 @@ let boardArray = [[false, false, false],
 
 let checkForDraw = function(){
 	let draw = false;
-	 if(turnTracker >= 8 ){
+	 if(turnTracker >= 8 && win !== true){
 		draw = true;
 		console.log("It's a tie!");
-	}
+}
 };
-
 let checkForWin = function () {
  let win = false;
-
+ console.log('currentPlayer');
+ console.log(boardArray);
  if(currentPlayer === boardArray[0] && currentPlayer === boardArray[1] && currentPlayer === boardArray[2] ||
    currentPlayer === boardArray[3] && currentPlayer === boardArray[4] && currentPlayer === boardArray[5] ||
    currentPlayer === boardArray[6] && currentPlayer === boardArray[7] && currentPlayer === boardArray[8] ||
@@ -35,13 +37,16 @@ let checkForWin = function () {
 };
 
 const swapPlayer = function(){
+  // index = parseInt($(this).data('number'));
 	if(turnTracker % 2 === 0) {
-		currentPlayer = "Player X";
-		marker = "X";
+		currentPlayer = "Player x";
+		marker = "x";
+    boardArray[index] = "x";
 		turnTracker++;
 	} else {
-		currentPlayer = "Player O";
-		marker =  "O";
+		currentPlayer = "Player o";
+		marker =  "o";
+    boardArray[index] = "o";
 		turnTracker++;
 	}
 };
@@ -60,18 +65,23 @@ const setGame = function(){
 	boardArray[8] = null;
 
 	// set the first player
-	currentPlayer = "Player X";
-	marker = "O";
+	currentPlayer = "Player o";
+	marker = "o";
 
 	// should probably clear the ui too, just in case.
 };
 
 const isSquareFree = function(index) {
+  boardArray[index] = marker;
+  console.log(index);
+  //   marker = index;
+  //   console.log(index);
+  //   console.log(currentPlayer);
 	// check the board to see if it's free.  Always returning true for now
 	console.log("Checking square "+index);
 	return true;
+// }
 };
-
 const markSquare = function(index) {
 	// mark this square as taken on the board.
 	console.log("Marking square "+index);
@@ -89,10 +99,11 @@ $(() => {
 		console.log($(this).data());
 		// get the id of the clicked div.  This is the square.
 		// Is that what this line does?
-		let index = parseInt($(this).data('number'));
+		// let index = parseInt($(this).data('number', 10));
 		console.log("Clicked square representing index "+index);
 
-
+  index = parseInt($(this).data('number'));
+    console.log(index);
 		// see if the clicked square is free
 		if (isSquareFree(index)) {
 			// mark the square as taken by this player
@@ -103,8 +114,10 @@ $(() => {
 
 			// see if we're done
 			if (checkForWin()) {
-				// flag that the game is done and this player won, somehow
+        $('h1').text("currentPlayer" + currentPlayer);
+				console.log("winner is" + currentPlayer);// flag that the game is done and this player won, somehow
 			} else if (checkForDraw()) {
+        console.log("draw");
 				// flag that it's a draw, somehow
 			} else {
 				// game is still going
