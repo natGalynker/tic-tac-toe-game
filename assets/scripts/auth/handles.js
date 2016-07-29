@@ -55,12 +55,14 @@ const onChangePlayer = function onChangePlayer(event) {
   .done(ui.success)
   .fail(ui.failure);
 };
+
 const onNewGame = function (event) {
   event.preventDefault();
   api.createGame()
   .done(ui.success)
   .fail(ui.failure);
 };
+
 const addHandlers = () => {
   $('#player-sign-up').on('submit', onSignUp);
   $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element

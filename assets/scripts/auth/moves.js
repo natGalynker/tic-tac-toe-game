@@ -1,4 +1,5 @@
 'use strict';
+const handles = require('./handles');
 let turnTracker = 0;
 let marker = ' ';
 let win = false;
@@ -18,16 +19,16 @@ let checkForDraw = function(){
 };
 let checkForWin = function () {
  let win = false;
- console.log('currentPlayer');
+ console.log(currentPlayer);
  console.log(boardArray);
- if(currentPlayer === boardArray[0] && currentPlayer === boardArray[1] && currentPlayer === boardArray[2] ||
-   currentPlayer === boardArray[3] && currentPlayer === boardArray[4] && currentPlayer === boardArray[5] ||
-   currentPlayer === boardArray[6] && currentPlayer === boardArray[7] && currentPlayer === boardArray[8] ||
-   currentPlayer === boardArray[0] && currentPlayer === boardArray[3] && currentPlayer === boardArray[6] ||
-   currentPlayer === boardArray[1] && currentPlayer === boardArray[4] && currentPlayer === boardArray[7] ||
-   currentPlayer === boardArray[2] && currentPlayer === boardArray[5] && currentPlayer === boardArray[8] ||
-   currentPlayer === boardArray[0] && currentPlayer === boardArray[4] && currentPlayer === boardArray[8] ||
-   currentPlayer === boardArray[2] && currentPlayer === boardArray[4] && currentPlayer === boardArray[6] ){
+ if(marker === boardArray[0] && marker === boardArray[1] && marker === boardArray[2] ||
+   marker === boardArray[3] && marker === boardArray[4] && marker === boardArray[5] ||
+   marker === boardArray[6] && marker === boardArray[7] && marker === boardArray[8] ||
+   marker === boardArray[0] && marker === boardArray[3] && marker === boardArray[6] ||
+   marker === boardArray[1] && marker === boardArray[4] && marker === boardArray[7] ||
+   marker === boardArray[2] && marker === boardArray[5] && marker === boardArray[8] ||
+   marker === boardArray[0] && marker === boardArray[4] && marker === boardArray[8] ||
+   marker === boardArray[2] && marker === boardArray[4] && marker === boardArray[6] ){
 	win = true;
 	console.log("winner is" +currentPlayer);
 
@@ -87,13 +88,11 @@ const markSquare = function(index) {
 	console.log("Marking square "+index);
 };
 
-
 $(() => {
 
 	// init the game board
 	setGame();
 
-	//set click handler
 	$('.main').on('click', 'div', function() {
 
 		console.log($(this).data());
@@ -114,7 +113,7 @@ $(() => {
 
 			// see if we're done
 			if (checkForWin()) {
-        $('h1').text("currentPlayer" + currentPlayer);
+        $('h1').text("Winner is" + " " + currentPlayer);
 				console.log("winner is" + currentPlayer);// flag that the game is done and this player won, somehow
 			} else if (checkForDraw()) {
         console.log("draw");
