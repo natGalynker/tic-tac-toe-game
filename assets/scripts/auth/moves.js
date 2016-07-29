@@ -74,6 +74,9 @@ const setGame = function(){
 	// marker = "o";
   $('.refresh-game').on('click', function(){
   $('.refresh-game').on('submit', setGame);
+  $('.new-game').on('click', function(){
+    $('.new-game').on('click', setGame);
+  });
 }
 	// should probably clear the ui too, just in case.
 
