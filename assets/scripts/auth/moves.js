@@ -72,29 +72,26 @@ const setGame = function(){
 	// set the first player
 	// currentPlayer = "Player o";
 	// marker = "o";
-  $('.refresh-game').on('click', function(){
+  //$('.refresh-game').on('click', function(){
+  //$('.refresh-game').on('submit', setGame);
+  //$('.new-game').on('click', function(){
+    //$('.new-game').on('click', setGame);
+};
+//});
+///}
+const refreshBoard = function () {
+  // use .css to set the layout to
+  //default layout.
   $('.refresh-game').on('submit', setGame);
-  $('.new-game').on('click', function(){
-    $('.new-game').on('click', setGame);
-  });
-}
-	// should probably clear the ui too, just in case.
-
-);
+  console.log("Refresh board when this button is clicked");
 };
 const isSquareFree = function(index) {
-  boardArray[index] = marker;
-  //console.log(index);
-  //   marker = index;
-  //   console.log(index);
-    console.log(currentPlayer);
-	// check the board to see if it's free.  Always returning true for now
-	//console.log("Checking square "+index);
-	return true;
-// }
+return (boardArray[index] === null);
 };
 const markSquare = function(index) {
 	// mark this square as taken on the board.
+    boardArray[index] = marker;
+    	$(this).text(marker);
 	console.log("Marking square "+index);
 
 };
@@ -121,7 +118,7 @@ $(() => {
 			markSquare(index);
 
 			// update the UI
-			$(this).text(marker);
+			// $(this).text(marker);
 
 			// see if we're done
 			if (checkForWin()) {
@@ -147,5 +144,6 @@ $(() => {
   checkForDraw,
   checkForWin,
   setGame,
-  handles
+  handles,
+  refreshBoard
 };

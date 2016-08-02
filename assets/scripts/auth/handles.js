@@ -44,7 +44,7 @@ api.show(gameId)
 };
 const onSignOut = function onSignOut(event) {
   event.preventDefault();
-  api.SignOut()
+  api.signOut()
   .done(ui.signOutSuccess)
   .fail(ui.failure);
 };
