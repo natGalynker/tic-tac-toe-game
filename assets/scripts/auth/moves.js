@@ -6,9 +6,8 @@ let win = false;
 let index;
 let draw;
 let currentPlayer = ' ';
-let boardArray = [[false, false, false],
-                 [false, false, false],
-                 [false, false, false]];
+let boardArray = [null, null, null, null, null, null, null, null, null];
+
 
 
 let checkForDraw = function(){
@@ -39,14 +38,13 @@ let checkForWin = function () {
 
 const swapPlayer = function(){
 	     if(turnTracker % 2 === 0) {
-		currentPlayer = "Player x";
-		marker = "x";
-		turnTracker++;
-	} else {
 		currentPlayer = "Player o";
-		marker =  "o";
-		turnTracker++;
+		marker = "o";
+	} else {
+		currentPlayer = "Player x";
+		marker =  "x";
 	}
+      turnTracker++;
 };
 const setGame = function(){
 	// empty board
@@ -63,8 +61,8 @@ const setGame = function(){
 
 	// set the first player
   turnTracker = 0;
-	currentPlayer = 'Player';
-  marker = 'o';
+	currentPlayer = 'Player x';
+  marker = 'x';
   $('.space').text('');
 
 };
@@ -78,52 +76,51 @@ const refreshBoard = function () {
 const isSquareFree = function(index) {
 return (boardArray[index] === null);
 };
-const markSquare = function(index) {
-  $('.space').on('click', function(){
-    $(this).text(marker);
+const markSquare = function(index, domSquare) {
+    $(domSquare).text(marker);
+    console.log(domSquare);
 	// mark this square as taken on the board.
-    boardArray[index] = currentPlayer;
-  });
+    boardArray[index] = marker;
 	console.log("Marking square "+index);
 
 };
 
 $(() => {
 
-	// init the game board
+  // init the game board
 
-	setGame();
+  setGame();
 
-	$('.main').on('click', 'div', function() {
+  $('.main').on('click', 'div', function() {
 
-   index = parseInt($(this).data('number'));
+    index = parseInt($(this).data('number'));
     //console.log(index);
-		// see if the clicked square is free
-		if (isSquareFree(index)) {
-			// mark the square as taken by this player
-			markSquare(index);
+    // see if the clicked square is free
+    if (isSquareFree(index)) {
+      // mark the square as taken by this player
+      markSquare(index, this);
 
-			// update the UI
-			// $(this).text(marker);
+      // update the UI
+      // $(this).text(marker);
 
-			// see if we're done
-			if (checkForWin()) {
+      // see if we're done
+      if (checkForWin()) {
         $('h1').text("Winner is player" +" " +marker );
-				console.log("winner is player " +" " + marker );// flag that the game is done and this player won, somehow
-			} else if (checkForDraw()) {
-        draw = true;
+        console.log("winner is player " +" " + marker );// flag that the game is done and this player won, somehow
+      } else if (checkForDraw()) {
+        console.log('Its a draw');
         $('h1').text("It's a Cats Game!");
 
-			} else {
-			// 	// game is still going
-				swapPlayer();
-			// }
-		}
-}
-	// });
- });
- });
- module.exports = {
+      } else {
+        // 	// game is still going
+        swapPlayer();
+        // }
+      }
+    }
+    // });
+  });
+});
+module.exports = {
   swapPlayer,
   checkForDraw,
   checkForWin,
