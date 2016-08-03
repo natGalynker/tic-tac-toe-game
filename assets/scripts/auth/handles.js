@@ -62,14 +62,14 @@ const onNewGame = function (event) {
   .done(ui.newGameSuccess)
   .fail(ui.failure);
 };
-const onUpdateGame = function (event) {
-  let data = moves(this);
-  event.preventDefault();
-  api.updateGame(data)
-  .done(ui.success)
-  .fail(ui.failure);
-
-};
+// const onUpdateGame = function (event) {
+//   let data = moves(this);
+//   event.preventDefault();
+//   api.updateGame(data)
+//   .done(ui.success)
+//   .fail(ui.failure);
+//
+// };
 const addHandlers = () => {
   $('#player-sign-up').on('submit', onSignUp);
   $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element
@@ -77,9 +77,9 @@ const addHandlers = () => {
   $('#sign-out').on('submit', onSignOut);    //id on sign-up. Then does something
   $('#change-player').on('submit', onChangePlayer);  //with the id it grabbed.
   $('.new-game').on('click', onNewGame);
-  $('.space').on('click', onUpdateGame);
+  // $('.space').on('click', onUpdateGame);
   // $('#showGame').on('click', onShowGame);
-  $('#updateGame').on('click', onUpdateGame);
+  // $('#updateGame').on('click', onUpdateGame);
   $('#indexGame').on('click', onGetGames);
 
 

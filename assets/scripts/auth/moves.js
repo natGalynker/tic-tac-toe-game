@@ -38,23 +38,15 @@ let checkForWin = function () {
 };
 
 const swapPlayer = function(){
-  //index = parseInt($(this).data('number'));
-  // turnTracker = 0;
-  // $('.space').text(' ');
-  // $('.space').on('click', function(){
-  //   $(this).off();
 	     if(turnTracker % 2 === 0) {
 		currentPlayer = "Player x";
 		marker = "x";
-    boardArray[index] = "x";
 		turnTracker++;
 	} else {
 		currentPlayer = "Player o";
 		marker =  "o";
-    boardArray[index] = "o";
 		turnTracker++;
 	}
-// });
 };
 const setGame = function(){
 	// empty board
@@ -70,16 +62,14 @@ const setGame = function(){
 	boardArray[8] = null;
 
 	// set the first player
-	// currentPlayer = "Player o";
-	// marker = "o";
-  //$('.refresh-game').on('click', function(){
-  //$('.refresh-game').on('submit', setGame);
-  //$('.new-game').on('click', function(){
-    //$('.new-game').on('click', setGame);
+  turnTracker = 0;
+	currentPlayer = 'Player';
+  marker = 'o';
+  $('.space').text('');
+
 };
-//});
-///}
 const refreshBoard = function () {
+    $('.space').text('');
   // use .css to set the layout to
   //default layout.
   $('.refresh-game').on('submit', setGame);
@@ -89,9 +79,11 @@ const isSquareFree = function(index) {
 return (boardArray[index] === null);
 };
 const markSquare = function(index) {
+  $('.space').on('click', function(){
+    $(this).text(marker);
 	// mark this square as taken on the board.
-    boardArray[index] = marker;
-    	$(this).text(marker);
+    boardArray[index] = currentPlayer;
+  });
 	console.log("Marking square "+index);
 
 };
@@ -104,13 +96,7 @@ $(() => {
 
 	$('.main').on('click', 'div', function() {
 
-		//console.log($(this).data());
-		// get the id of the clicked div.  This is the square.
-		// Is that what this line does?
-		// let index = parseInt($(this).data('number', 10));
-	//	console.log("Clicked square representing index "+index);
-
-  index = parseInt($(this).data('number'));
+   index = parseInt($(this).data('number'));
     //console.log(index);
 		// see if the clicked square is free
 		if (isSquareFree(index)) {
@@ -128,8 +114,6 @@ $(() => {
         draw = true;
         $('h1').text("It's a Cats Game!");
 
-        //console.log("draw");
-				// flag that it's a draw, somehow
 			} else {
 			// 	// game is still going
 				swapPlayer();
