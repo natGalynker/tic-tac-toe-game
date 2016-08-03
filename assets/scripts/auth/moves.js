@@ -11,11 +11,11 @@ let boardArray = [null, null, null, null, null, null, null, null, null];
 
 
 let checkForDraw = function(){
-	draw = false;
-	 if(turnTracker ===9 && !win){
+	 if(turnTracker ===8 && !win){
 		draw = true;
 		console.log("It's a tie!");
 }
+return draw;
 };
 let checkForWin = function () {
  let win = false;
