@@ -9,7 +9,7 @@ let currentPlayer = ' ';
 let boardArray = [null, null, null, null, null, null, null, null, null];
 
 
-
+//Draw conditions
 let checkForDraw = function(){
 	 if(turnTracker ===8 && !win){
 		draw = true;
@@ -17,6 +17,7 @@ let checkForDraw = function(){
 }
 return draw;
 };
+//win conditions
 let checkForWin = function () {
  let win = false;
  console.log(boardArray);
@@ -35,7 +36,7 @@ let checkForWin = function () {
 
    return win;
 };
-
+//alternate players after 
 const swapPlayer = function(){
 	     if(turnTracker % 2 === 0) {
 		currentPlayer = "Player o";
@@ -63,19 +64,16 @@ const setGame = function(){
   turnTracker = 0;
 	currentPlayer = 'Player x';
   marker = 'x';
+	//clear the UI so so multiple games can happen
   $('.space').text('');
+	$('h1').text('');
 
 };
-const refreshBoard = function () {
-    $('.space').text('');
-  // use .css to set the layout to
-  //default layout.
-  $('.refresh-game').on('submit', setGame);
-  console.log("Refresh board when this button is clicked");
-};
+//check to see if square is null
 const isSquareFree = function(index) {
 return (boardArray[index] === null);
 };
+//mark the square as  occupied
 const markSquare = function(index, domSquare) {
     $(domSquare).text(marker);
     console.log(domSquare);
@@ -90,7 +88,9 @@ $(() => {
   // init the game board
 
   setGame();
-
+	// refreshBoard();
+	$('#refresh-game').on('click', setGame);
+	console.log("Refresh board when this button is clicked");
   $('.main').on('click', 'div', function() {
 
     index = parseInt($(this).data('number'));
@@ -125,6 +125,5 @@ module.exports = {
   checkForDraw,
   checkForWin,
   setGame,
-  handles,
-  refreshBoard
+  handles
 };
