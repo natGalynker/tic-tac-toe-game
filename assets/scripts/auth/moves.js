@@ -4,15 +4,17 @@ let turnTracker = 0;
 let marker = ' ';
 let win = false;
 let index;
-let draw;
 let currentPlayer = ' ';
 let boardArray = [null, null, null, null, null, null, null, null, null];
 
-//Draw conditions
+//Draw conditions'
 let checkForDraw = function(){
+	let draw = false;
 	if(turnTracker ===8 && !win){
 		draw = true;
 		console.log("It's a tie!");
+	} else {
+		draw = false;
 	}
 	return draw;
 };
