@@ -31,7 +31,7 @@ const signInSuccess = (data) =>{
     console.log(app);
   };
 
-module.exports = {
+ module.exports = {
   failure,
   success,
   signInSuccess,
