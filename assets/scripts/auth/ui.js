@@ -31,6 +31,10 @@ const signInSuccess = (data) =>{
     console.log(app);
   };
 
+  const getGameSuccess = (data) => {
+    app.user =
+  }
+
  module.exports = {
   failure,
   success,

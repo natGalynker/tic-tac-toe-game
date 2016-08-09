@@ -102,6 +102,12 @@ let checkForWin = function () {
 				//if it is...
 				// mark the square as taken by this player
 				markSquare(index, this);
+				//communicate with the api
+				//log each move with index and marker
+				//take the index of the array and send it to the api to update the array
+				
+				//with index and marker
+				//to updateGame to save that move to the api
 				// update the UI
 				// see if we're done
 				if (checkForWin()) {
@@ -110,6 +116,9 @@ let checkForWin = function () {
 				} else if (checkForDraw()) {
 					console.log('Its a draw');
 					$('h1').text("It's a Cats Game!");
+					//else if checkForDraw or checkForWin true
+					//stop game play. Game over
+					//take this game over to send to api for update game
 
 				} else {
 					// 	// game is still going
