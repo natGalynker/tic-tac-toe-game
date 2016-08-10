@@ -91,16 +91,21 @@ webpackJsonp([0],[
 	  event.preventDefault();
 	  api.changePassword(data).done(ui.success).fail(ui.failure);
 	};
+	// if(bookId.length ===0){
+	// libraryApi.index()
+	//   .done(ui.onSuccess)
+	//   .fail(ui.onError);
+	// } else{
+	//   libraryApi.show(bookId)
+	//   .done(ui.onSuccess)
+	//   .fail(ui.onError);
 	var onGetGames = function onGetGames(event) {
-	  var data = getFormFields(this);
 	  event.preventDefault();
-	  var gameId = $('#user-id').val();
+	  var gameId = $('#getGame').val();
 	  if (gameId.length === 0) {
-	    api.index(data).done(ui.success).fail(ui.failure);
-	    //  } else {
-	    // api.show(gameId)
-	    // .done(ui.success)
-	    // .fail(ui.failure);
+	    api.index().done(ui.getGameSuccess).fail(ui.failure);
+	  } else {
+	    api.show(gameId).done(ui.getGameSuccess).fail(ui.failure);
 	  }
 	};
 	var onSignOut = function onSignOut(event) {
@@ -128,10 +133,7 @@ webpackJsonp([0],[
 	  $('#sign-out').on('submit', onSignOut); //id on sign-up. Then does something
 	  $('#change-player').on('submit', onChangePlayer); //with the id it grabbed.
 	  $('.new-game').on('click', onNewGame);
-	  //$('.space').on('click', onUpdateGame);
-	  // $('#showGame').on('click', onShowGame);
-	  // $('#updateGame').on('click', onUpdateGame);
-	  $('#user-id').on('click', onGetGames);
+	  $('#getGame').on('click', onGetGames);
 	};
 	$(function () {});
 	module.exports = {
@@ -352,7 +354,7 @@ webpackJsonp([0],[
 	  console.log(app);
 	};
 	var updateGameSuccess = function updateGameSuccess(data) {
-	  app.game = data.games;
+	  app.game = data.game;
 	  console.log(app);
 	};
 
@@ -382,7 +384,6 @@ webpackJsonp([0],[
 	var handles = __webpack_require__(2);
 	var turnTracker = 0;
 	var marker = ' ';
-	var win = false;
 	var index = void 0;
 	var currentPlayer = ' ';
 	var boardArray = [null, null, null, null, null, null, null, null, null];
@@ -390,7 +391,7 @@ webpackJsonp([0],[
 	//Draw conditions'
 	var checkForDraw = function checkForDraw() {
 		var draw = false;
-		if (turnTracker === 8 && !win) {
+		if (turnTracker === 8) {
 			draw = true;
 			console.log("It's a tie!");
 		} else {
@@ -468,8 +469,8 @@ webpackJsonp([0],[
 		console.log("Refresh board when this button is clicked");
 		$('.main').on('click', 'div', function () {
 
-			index = parseInt($(this).data('number'));
-
+			index = parseInt($(this).data('number'), 10);
+			handles.onUpdateGame(index, marker);
 			if (isSquareFree(index)) {
 				//check to see if the square is indeed free
 				//if it is...
