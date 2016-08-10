@@ -11,7 +11,7 @@ webpackJsonp([0],[
 	// scripts
 
 	__webpack_require__(1);
-	__webpack_require__(5);
+	__webpack_require__(8);
 	// styles
 	__webpack_require__(9);
 
@@ -70,9 +70,9 @@ webpackJsonp([0],[
 
 	var getFormFields = __webpack_require__(4);
 
-	var moves = __webpack_require__(5);
-	var api = __webpack_require__(6);
-	var ui = __webpack_require__(8);
+	// const moves = require('./moves');
+	var api = __webpack_require__(5);
+	var ui = __webpack_require__(7);
 
 	var onSignUp = function onSignUp(event) {
 	  var data = getFormFields(this);
@@ -92,13 +92,15 @@ webpackJsonp([0],[
 	  api.changePassword(data).done(ui.success).fail(ui.failure);
 	};
 	var onGetGames = function onGetGames(event) {
+	  var data = getFormFields(this);
 	  event.preventDefault();
-	  var gameId = '#game-id'.val();
-
+	  var gameId = $('#user-id').val();
 	  if (gameId.length === 0) {
-	    api.index().done(ui.onSuccess).fail(ui.onError);
-	  } else {
-	    api.show(gameId).done(ui.onSuccess).fail(ui.onError);
+	    api.index(data).done(ui.success).fail(ui.failure);
+	    //  } else {
+	    // api.show(gameId)
+	    // .done(ui.success)
+	    // .fail(ui.failure);
 	  }
 	};
 	var onSignOut = function onSignOut(event) {
@@ -115,14 +117,10 @@ webpackJsonp([0],[
 	  event.preventDefault();
 	  api.newGame().done(ui.newGameSuccess).fail(ui.failure);
 	};
-	// const onUpdateGame = function (event) {
-	//   let data = moves(this);
-	//   event.preventDefault();
-	//   api.updateGame(data)
-	//   .done(ui.success)
-	//   .fail(ui.failure);
-	//
-	// };
+	var onUpdateGame = function onUpdateGame(marker, index) {
+	  event.preventDefault();
+	  api.updateGame(marker, index).done(ui.updateGameSuccess).fail(ui.failure);
+	};
 	var addHandlers = function addHandlers() {
 	  $('#player-sign-up').on('submit', onSignUp);
 	  $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element
@@ -130,31 +128,16 @@ webpackJsonp([0],[
 	  $('#sign-out').on('submit', onSignOut); //id on sign-up. Then does something
 	  $('#change-player').on('submit', onChangePlayer); //with the id it grabbed.
 	  $('.new-game').on('click', onNewGame);
-	  // $('.space').on('click', onUpdateGame);
+	  //$('.space').on('click', onUpdateGame);
 	  // $('#showGame').on('click', onShowGame);
 	  // $('#updateGame').on('click', onUpdateGame);
-	  $('#indexGame').on('click', onGetGames);
+	  $('#user-id').on('click', onGetGames);
 	};
-	$(function () {
-	  // $('.space').on('click', function(){
-	  //   console.log('it clicked!');
-	  // });
-
-
-	});
+	$(function () {});
 	module.exports = {
-	  addHandlers: addHandlers
+	  addHandlers: addHandlers,
+	  onUpdateGame: onUpdateGame
 	};
-
-	//   $('#signUpModal').on('click', function () {
-	//     $('#signUpModal').modal('show');
-	//     $('.this-test-modal').on('click', function(){
-	//       console.log($('.test-message').val());
-	//       let words = $('#test-modal').modal('hide');
-	//       console.log(words);
-	//     });
-	//   });
-	// });
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
@@ -229,20 +212,189 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
+	var app = __webpack_require__(6);
+	// keep eye on the names used as the form id. they correlate to the end points
+	//that are being assigned to the url's value here.
+	var signUp = function signUp(data) {
+	  console.log(data);
+	  return $.ajax({ //same as return $.ajax({
+	    url: app.api + '/sign-up',
+	    method: 'POST',
+	    data: data
+	  });
+	};
+	var signIn = function signIn(data) {
+	  console.log(data);
+	  return $.ajax({
+	    url: app.api + '/sign-in',
+	    method: 'POST',
+	    data: data
+	  });
+	};
+
+	var changePassword = function changePassword(data) {
+	  console.log(data);
+	  console.log(app.user.token);
+	  return $.ajax({
+	    url: app.api + '/change-password/' + app.user.id,
+	    method: 'PATCH',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+	var newGame = function newGame() {
+	  return $.ajax({
+	    url: app.api + '/games/',
+	    method: 'POST',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    }
+	  });
+	};
+	var updateGame = function updateGame(marker, index) {
+	  return $.ajax({
+	    url: app.api + '/games/' + app.game.id,
+	    method: 'PATCH',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: {
+	      "game": {
+	        "cell": {
+	          "index": index,
+	          "value": marker
+	        },
+	        "over": false
+	      }
+	    }
+	  });
+	};
+
+	var index = function index() {
+	  return $.ajax({
+	    url: app.api + '/games',
+	    method: 'GET',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    }
+	  });
+	};
+	var show = function show(data) {
+	  return $.ajax({
+	    url: app.api + '/games/' + app.user.id,
+	    method: 'GET',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: data
+	  });
+	};
+
+	var signOut = function signOut() {
+	  return $.ajax({
+	    url: app.api + '/sign-out/' + app.user.id,
+	    method: 'DELETE',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    }
+	  });
+	};
+
+	module.exports = {
+	  signUp: signUp,
+	  signIn: signIn,
+	  changePassword: changePassword,
+	  signOut: signOut,
+	  newGame: newGame,
+	  index: index,
+	  updateGame: updateGame,
+	  show: show
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 6 */,
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var app = __webpack_require__(6); //put it in app because there isnt any real code
+	// we do this to avoid circular dependency
+	//this way we can share data from one file and share
+	//among all the different files that depend on that data
+
+	var success = function success(data) {
+	  if (data) {
+	    console.log(data);
+	  }
+	};
+
+	var failure = function failure(error) {
+	  console.error(error);
+	};
+
+	var newGameSuccess = function newGameSuccess(data) {
+	  app.game = data.game;
+	  console.log(app);
+	};
+
+	var signInSuccess = function signInSuccess(data) {
+	  app.user = data.user; //can use app.user or app.token. we know this because the
+	  console.log(app); //console in browser told us that we have the key user
+	  //even though we did not define one. User contains the
+	}; //token that we care about
+
+	var signOutSuccess = function signOutSuccess() {
+	  delete app.user;
+	  console.log(app);
+	};
+	var updateGameSuccess = function updateGameSuccess(data) {
+	  app.game = data.games;
+	  console.log(app);
+	};
+
+	//   const getGameSuccess = (data) => {
+	//     if(data.games){
+	//       console.log(data.games);
+	//   } else{
+	//     console.log('fail');
+	//   }
+	// };
+	module.exports = {
+	  failure: failure,
+	  success: success,
+	  signInSuccess: signInSuccess,
+	  signOutSuccess: signOutSuccess,
+	  newGameSuccess: newGameSuccess,
+	  //getGameSuccess
+	  updateGameSuccess: updateGameSuccess
+	};
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
 	var handles = __webpack_require__(2);
 	var turnTracker = 0;
 	var marker = ' ';
 	var win = false;
 	var index = void 0;
-	var draw = void 0;
 	var currentPlayer = ' ';
 	var boardArray = [null, null, null, null, null, null, null, null, null];
 
-	//Draw conditions
+	//Draw conditions'
 	var checkForDraw = function checkForDraw() {
+		var draw = false;
 		if (turnTracker === 8 && !win) {
 			draw = true;
 			console.log("It's a tie!");
+		} else {
+			draw = false;
 		}
 		return draw;
 	};
@@ -323,6 +475,12 @@ webpackJsonp([0],[
 				//if it is...
 				// mark the square as taken by this player
 				markSquare(index, this);
+				//communicate with the api
+				//log each move with index and marker
+				//take the index of the array and send it to the api to update the array
+
+				//with index and marker
+				//to updateGame to save that move to the api
 				// update the UI
 				// see if we're done
 				if (checkForWin()) {
@@ -331,6 +489,9 @@ webpackJsonp([0],[
 				} else if (checkForDraw()) {
 					console.log('Its a draw');
 					$('h1').text("It's a Cats Game!");
+					//else if checkForDraw or checkForWin true
+					//stop game play. Game over
+					//take this game over to send to api for update game
 				} else {
 					// 	// game is still going
 					swapPlayer();
@@ -347,163 +508,6 @@ webpackJsonp([0],[
 		setPlay: setPlay
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
-	var app = __webpack_require__(7);
-	// keep eye on the names used as the form id. they correlate to the end points
-	//that are being assigned to the url's value here.
-	var signUp = function signUp(data) {
-	  console.log(data);
-	  return $.ajax({ //same as return $.ajax({
-	    url: app.api + '/sign-up',
-	    method: 'POST',
-	    data: data
-	  });
-	};
-	var signIn = function signIn(data) {
-	  console.log(data);
-	  return $.ajax({
-	    url: app.api + '/sign-in',
-	    method: 'POST',
-	    data: data
-	  });
-	};
-	var index = function index() {
-	  return $.ajax({
-	    url: app.api + '/games',
-	    method: 'GET'
-	  });
-	};
-
-	var show = function show(gameId) {
-	  return $.ajax({
-	    url: app.api + '/games/' + gameId,
-	    method: 'GET'
-	  });
-	};
-
-	// const createGame= function () {
-	//   return $.ajax({
-	//     url: app.api + '/games',
-	//     method: 'POST' + '{}',
-	//     Authorization: 'Token token=' + app.user.token,
-	//   },
-	//     data,
-	// });
-	var changePassword = function changePassword(data) {
-	  console.log(data);
-	  console.log(app.user.token);
-	  return $.ajax({
-	    url: app.api + '/change-password/' + app.user.id,
-	    method: 'PATCH',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    },
-	    data: data
-	  });
-	};
-	var signOut = function signOut() {
-	  return $.ajax({
-	    url: app.api + '/sign-out/' + app.user.id,
-	    method: 'DELETE',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    }
-	  });
-	};
-	var changePlayer = function changePlayer(data) {
-	  return $.ajax({
-	    url: app.api + '/change-player' + app.user.id,
-	    method: 'PATCH',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    },
-	    data: data
-	  });
-	};
-	var updateGame = function updateGame(data) {
-	  return $.ajax({
-	    url: app.api + '/games/' + app.game.id,
-	    method: 'PATCH',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    },
-	    data: data
-	  });
-	};
-	var newGame = function newGame() {
-	  return $.ajax({
-	    url: app.api + '/games/',
-	    method: 'POST',
-	    headers: {
-	      Authorization: 'Token token=' + app.user.token
-	    }
-	  });
-	};
-
-	module.exports = {
-	  signUp: signUp,
-	  signIn: signIn,
-	  changePassword: changePassword,
-	  signOut: signOut,
-	  changePlayer: changePlayer,
-	  newGame: newGame,
-	  index: index,
-	  show: show,
-	  updateGame: updateGame
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 7 */,
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var app = __webpack_require__(7); //put it in app because there isnt any real code
-	// we do this to avoid circular dependency
-	//this way we can share data from one file and share
-	//among all the different files that depend on that data
-
-	var success = function success(data) {
-	  if (data) {
-	    console.log(data);
-	  }
-	};
-
-	var failure = function failure(error) {
-	  console.error(error);
-	};
-
-	var newGameSuccess = function newGameSuccess(data) {
-	  app.game = data.game;
-	  console.log(app);
-	};
-
-	var signInSuccess = function signInSuccess(data) {
-	  app.user = data.user; //can use app.user or app.token. we know this because the
-	  console.log(app); //console in browser told us that we have the key user
-	  //even though we did not define one. User contains the
-	}; //token that we care about
-
-	var signOutSuccess = function signOutSuccess() {
-	  delete app.user;
-	  console.log(app);
-	};
-
-	module.exports = {
-	  failure: failure,
-	  success: success,
-	  signInSuccess: signInSuccess,
-	  signOutSuccess: signOutSuccess,
-	  newGameSuccess: newGameSuccess
-	};
 
 /***/ },
 /* 9 */

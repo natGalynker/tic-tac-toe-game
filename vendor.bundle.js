@@ -9926,7 +9926,7 @@
 
 /***/ },
 
-/***/ 7:
+/***/ 6:
 /***/ function(module, exports) {
 
 	'use strict';
