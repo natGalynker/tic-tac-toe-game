@@ -28,18 +28,25 @@ const onChangePassword = function onChangePassword(event) {
   .done(ui.success)
   .fail(ui.failure);
 };
+// if(bookId.length ===0){
+// libraryApi.index()
+//   .done(ui.onSuccess)
+//   .fail(ui.onError);
+// } else{
+//   libraryApi.show(bookId)
+//   .done(ui.onSuccess)
+//   .fail(ui.onError);
 const onGetGames = function onGetGames(event) {
-  let data = getFormFields(this);
   event.preventDefault();
-  let gameId = $('#user-id').val();
+  let gameId = $('#getGame').val();
  if (gameId.length === 0) {
-   api.index(data)
-   .done(ui.success)
+   api.index()
+   .done(ui.getGameSuccess)
    .fail(ui.failure);
-//  } else {
-// api.show(gameId)
-// .done(ui.success)
-// .fail(ui.failure);
+} else {
+api.show(gameId)
+.done(ui.getGameSuccess)
+.fail(ui.failure);
  }
  };
 const onSignOut = function onSignOut(event) {
@@ -62,7 +69,7 @@ const onNewGame = function (event) {
   .done(ui.newGameSuccess)
   .fail(ui.failure);
 };
-const onUpdateGame = function (marker, index) {
+const onUpdateGame = function onUpdateGame(marker, index) {
   event.preventDefault();
   api.updateGame(marker, index)
   .done(ui.updateGameSuccess)
@@ -76,10 +83,7 @@ const addHandlers = () => {
   $('#sign-out').on('submit', onSignOut);    //id on sign-up. Then does something
   $('#change-player').on('submit', onChangePlayer);  //with the id it grabbed.
   $('.new-game').on('click', onNewGame);
-  //$('.space').on('click', onUpdateGame);
-  // $('#showGame').on('click', onShowGame);
-  // $('#updateGame').on('click', onUpdateGame);
-  $('#user-id').on('click', onGetGames);
+  $('#getGame').on('click', onGetGames);
 
 
 

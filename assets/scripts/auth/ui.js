@@ -31,7 +31,7 @@ const signInSuccess = (data) =>{
     console.log(app);
   };
   const updateGameSuccess = (data) => {
-    app.game = data.games;
+    app.game = data.game;
     console.log(app);
   };
 
