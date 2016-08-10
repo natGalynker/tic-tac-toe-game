@@ -62,14 +62,13 @@ const onNewGame = function (event) {
   .done(ui.newGameSuccess)
   .fail(ui.failure);
 };
-// const onUpdateGame = function (event) {
-//   let data = moves(this);
-//   event.preventDefault();
-//   api.updateGame(data)
-//   .done(ui.success)
-//   .fail(ui.failure);
-//
-// };
+const onUpdateGame = function (marker, index) {
+  event.preventDefault();
+  api.updateGame(marker, index)
+  .done(ui.updateGameSuccess)
+  .fail(ui.failure);
+
+};
 const addHandlers = () => {
   $('#player-sign-up').on('submit', onSignUp);
   $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element
@@ -84,10 +83,12 @@ const addHandlers = () => {
 
 
 
+
 };
 $(() => {
 
 });
 module.exports = {
   addHandlers,
+  onUpdateGame
 };
