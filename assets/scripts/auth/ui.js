@@ -30,11 +30,24 @@ const signInSuccess = (data) =>{
     delete app.user;
     console.log(app);
   };
+  const updateGameSuccess = (data) => {
+    app.game = data.games;
+    console.log(app);
+  };
 
-module.exports = {
+//   const getGameSuccess = (data) => {
+//     if(data.games){
+//       console.log(data.games);
+//   } else{
+//     console.log('fail');
+//   }
+// };
+ module.exports = {
   failure,
   success,
   signInSuccess,
   signOutSuccess,
-  newGameSuccess
+  newGameSuccess,
+  //getGameSuccess
+  updateGameSuccess
 };

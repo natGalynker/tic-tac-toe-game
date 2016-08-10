@@ -18,28 +18,7 @@ const signIn = function (data) {
     data,
 });
 };
-const index = function () {
-  return $.ajax({
-    url: app.api + '/games',
-    method: 'GET',
-  });
-};
 
-const show = function (gameId) {
-  return $.ajax({
-    url: app.api + '/games/' + gameId,
-    method: 'GET',
-  });
-};
-
-// const createGame= function () {
-//   return $.ajax({
-//     url: app.api + '/games',
-//     method: 'POST' + '{}',
-//     Authorization: 'Token token=' + app.user.token,
-//   },
-//     data,
-// });
 const changePassword = function (data) {
   console.log(data);
   console.log(app.user.token);
@@ -52,32 +31,54 @@ const changePassword = function (data) {
     data,
 });
 };
-const signOut = () => $.ajax({
-  url: app.api +'/sign-out/' + app.user.id,
-  method: 'DELETE',
+const newGame = () => $.ajax({
+  url: app.api+ '/games/',
+  method: 'POST',
   headers: {
     Authorization: 'Token token=' + app.user.token,
   },
 });
-const changePlayer = (data) => $.ajax({
-  url: app.api + '/change-player' + app.user.id,
-  method: 'PATCH',
-  headers: {
-    Authorization: 'Token token=' +app.user.token,
-  },
-  data,
-});
-const updateGame = (data) => $.ajax({
+const updateGame = (marker, index) => $.ajax({
   url: app.api+ '/games/' + app.game.id,
   method: 'PATCH',
   headers: {
     Authorization: 'Token token=' + app.user.token,
   },
-  data,
-})
-const newGame = () => $.ajax({
-  url: app.api+ '/games/',
-  method: 'POST',
+  data:
+  {
+  "game": {
+    "cell": {
+      "index": index,
+      "value": marker
+    },
+    "over": false
+  }
+}
+});
+
+const index = function () {
+  return $.ajax({
+    url: app.api + '/games',
+    method: 'GET',
+    headers: {
+    Authorization: 'Token token=' + app.user.token,
+    },
+  });
+};
+const show = function(data){
+  return $.ajax({
+    url: app.api + '/games/' + app.user.id,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + app.user.token,
+    },
+      data,
+  });
+};
+
+const signOut = () => $.ajax({
+  url: app.api +'/sign-out/' + app.user.id,
+  method: 'DELETE',
   headers: {
     Authorization: 'Token token=' + app.user.token,
   },
@@ -88,9 +89,8 @@ module.exports = {
   signIn,
   changePassword,
   signOut,
-  changePlayer,
   newGame,
   index,
-  show,
   updateGame,
+  show
 };
