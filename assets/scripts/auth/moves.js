@@ -95,7 +95,6 @@ let checkForWin = function () {
 		$('.main').on('click', 'div', function() {
 
 			index = parseInt($(this).data('number'), 10);
-			handles.onUpdateGame(index, marker);
 			if (isSquareFree(index)) {
 				//check to see if the square is indeed free
 				//if it is...
