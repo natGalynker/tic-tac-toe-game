@@ -31,14 +31,21 @@ const signInSuccess = (data) =>{
     console.log(app);
   };
 
-  const getGameSuccess = (data) => {
-    app.user =
-  }
+  const updateGameSuccess = function (data) {
+  	  app.game = data.game;
+  	  console.log(app);
+  	};
+    const getGameSuccess = (data) => {
+      app.game = data.game;
+
+    };
 
  module.exports = {
   failure,
   success,
   signInSuccess,
   signOutSuccess,
-  newGameSuccess
+  newGameSuccess,
+  updateGameSuccess,
+  getGameSuccess
 };

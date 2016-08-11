@@ -18,14 +18,13 @@
           <span class="icon-bar"></span>
         </button>
         <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#signUpModal">Sign UP</button>
-        <!-- <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#signInModal">Sign In</button> -->
         <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#changePwModal">Change Password</button>
         <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#signInModal">Sign In</button>
+        <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#getGameModal">Get Your Game</button>
         <a class="navbar-brand" href="#">Tic Tac Toe</a>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#Update" id="updateGame" class="navbar-nav pull-right">Update Game</a></li>
-            <li><a href="#Get" class="navbar-nav pull-right">Get Scores By Id<input name="game[cell][index]" id="user-id" class="index" type="text" style="display: none"></a></li>
+            <!-- <li><a href="#Get" class="navbar-nav pull-right">Get Scores By Id<input name="game[cell][index]" id="user-id" class="index" type="text" style="display: none"></a></li> -->
           </ul>
         </div>
       </div>
@@ -40,9 +39,9 @@
         </div>
         <div class="modal-body">
           <div class= "input-group">
-            <form class="form-group" id="getGameById">
-              <input type="text" class="form-control user-id"
-               placeholder="Enter Id">
+            <form class="form-group" id="getGames">
+              <input type="text" class="form-control game-id"
+              placeholder="Enter Id">
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <input type="submit" class="sign-button" name="submit" value="Get Info!">
@@ -144,35 +143,35 @@
   </form>
   <form class="form-group" id="refresh-game" action="index.html" method="post">
     <input type="button" name="submit" Value="Refresh">
-      </form>
-<div class="main">
-  <div data-number="0" class= "box-1 space">
-    <p>Test</p>
+  </form>
+  <div class="main">
+    <div data-number="0" class= "box-1 space">
+      <p>Test</p>
+    </div>
+    <div data-number="1" class="box-2 space">
+      <p>Test</p>
+    </div>
+    <div data-number="2" class="box-3 space">
+      <p>Test</p>
+    </div>
+    <div data-number="3" class="box-4 space">
+      <p>Test</p>
+    </div>
+    <div data-number="4" class="box-5 space">
+      <p>Test</p>
+    </div>
+    <div data-number="5" class="box-6 space">
+      <p>Test</p>
+    </div>
+    <div data-number="6" class="box-7 space">
+      <p>Test</p>
+    </div>
+    <div data-number="7" class="box-8 space">
+      <p>Test</p>
+    </div>
+    <div data-number="8" class="box-9 space">
+      <p>Test</p>
+    </div>
   </div>
-  <div data-number="1" class="box-2 space">
-    <p>Test</p>
-  </div>
-  <div data-number="2" class="box-3 space">
-    <p>Test</p>
-  </div>
-  <div data-number="3" class="box-4 space">
-    <p>Test</p>
-  </div>
-  <div data-number="4" class="box-5 space">
-    <p>Test</p>
-  </div>
-  <div data-number="5" class="box-6 space">
-    <p>Test</p>
-  </div>
-  <div data-number="6" class="box-7 space">
-    <p>Test</p>
-  </div>
-  <div data-number="7" class="box-8 space">
-    <p>Test</p>
-  </div>
-  <div data-number="8" class="box-9 space">
-    <p>Test</p>
-  </div>
-</div>
 </body>
 </html>

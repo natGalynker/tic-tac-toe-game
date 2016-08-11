@@ -102,10 +102,11 @@ let checkForWin = function () {
 				//if it is...
 				// mark the square as taken by this player
 				markSquare(index, this);
+				handles.onUpdateGame(marker, index);
 				//communicate with the api
 				//log each move with index and marker
 				//take the index of the array and send it to the api to update the array
-				
+
 				//with index and marker
 				//to updateGame to save that move to the api
 				// update the UI

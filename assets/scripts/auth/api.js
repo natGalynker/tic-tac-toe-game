@@ -18,37 +18,26 @@ const signIn = function (data) {
     data,
 });
 };
-const index = function () {
+const index = function index() {
   return $.ajax({
     url: app.api + '/games',
     method: 'GET',
     headers: {
-    Authorization: 'Token token=' + app.user.token,
-    },
+      Authorization: 'Token token=' + app.user.token
+    }
   });
 };
-const show = function(id){
+const show = function show(data) {
   return $.ajax({
+    url: app.api + '/games/' + app.game.id,
     method: 'GET',
-    url: app.host + '/games/' + app.user.id
+    headers: {
+      Authorization: 'Token token=' + app.user.token
+    },
+    data: data
   });
 };
 
-// const show = function (gameId) {
-//   return $.ajax({
-//     url: app.api + '/games/' + gameId,
-//     method: 'GET',
-//   });
-// };
-
-// const createGame= function () {
-//   return $.ajax({
-//     url: app.api + '/games',
-//     method: 'POST' + '{}',
-//     Authorization: 'Token token=' + app.user.token,
-//   },
-//     data,
-// });
 const changePassword = function (data) {
   console.log(data);
   console.log(app.user.token);
@@ -69,23 +58,25 @@ const signOut = () => $.ajax({
   },
 });
 
-const updateGame = (marker, index) => $.ajax({
-  url: app.api+ '/games/' + app.game.id,
-  method: 'PATCH',
-  headers: {
-    Authorization: 'Token token=' + app.user.token,
-  },
-  data:
-  {
-  "game": {
-    "cell": {
-      "index": index,
-      "value": marker
-    },
-    "over": false
-  }
-}
-});
+const updateGame = function updateGame(marker, index) {
+	  return $.ajax({
+	    url: app.api + '/games/' + app.game.id,
+	    method: 'PATCH',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: {
+	      "game": {
+	        "cell": {
+	          "index": index,
+	          "value": marker
+	        },
+	        "over": false
+	      }
+	    }
+	  });
+	};
+
 const newGame = () => $.ajax({
   url: app.api+ '/games/',
   method: 'POST',
