@@ -2,7 +2,6 @@
 const handles = require('./handles');
 let turnTracker = 0;
 let marker = ' ';
-let win = false;
 let index;
 let currentPlayer = ' ';
 let boardArray = [null, null, null, null, null, null, null, null, null];
@@ -10,7 +9,7 @@ let boardArray = [null, null, null, null, null, null, null, null, null];
 //Draw conditions'
 let checkForDraw = function(){
 	let draw = false;
-	if(turnTracker ===8 && !win){
+	if(turnTracker ===8){
 		draw = true;
 		console.log("It's a tie!");
 	} else {
@@ -95,8 +94,8 @@ let checkForWin = function () {
 		console.log("Refresh board when this button is clicked");
 		$('.main').on('click', 'div', function() {
 
-			index = parseInt($(this).data('number'));
-
+			index = parseInt($(this).data('number'), 10);
+			handles.onUpdateGame(index, marker);
 			if (isSquareFree(index)) {
 				//check to see if the square is indeed free
 				//if it is...

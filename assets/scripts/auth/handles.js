@@ -39,8 +39,8 @@ const onGetGames = function onGetGames(event) {
 	    api.show(gameId)
       .done(ui.getGameSuccess)
       .fail(ui.failure);
-	  }
-	};
+ }
+ };
 const onSignOut = function onSignOut(event) {
   event.preventDefault();
   api.signOut()
@@ -60,6 +60,7 @@ const onUpdateGame = function onUpdateGame(marker, index) {
     .done(ui.updateGameSuccess)
     .fail(ui.failure);
 	};
+
 const addHandlers = () => {
   $('#player-sign-up').on('submit', onSignUp);
   $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element
@@ -67,6 +68,7 @@ const addHandlers = () => {
   $('#sign-out').on('submit', onSignOut);    //id on sign-up. Then does something
   $('.new-game').on('click', onNewGame);
   $('#getGames').on('click', onGetGames);
+
 
 
 
