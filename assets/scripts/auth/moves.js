@@ -3,6 +3,7 @@ const handles = require('./handles');
 let turnTracker = 0;
 let marker = ' ';
 let index;
+let over;
 let currentPlayer = ' ';
 let boardArray = [null, null, null, null, null, null, null, null, null];
 
@@ -22,6 +23,7 @@ let checkForDraw = function(){
 
 let checkForWin = function () {
 	let win = false;
+	over = false;
 	console.log(boardArray);
 	if(marker === boardArray[0] && marker === boardArray[1] && marker === boardArray[2] ||
 		marker === boardArray[3] && marker === boardArray[4] && marker === boardArray[5] ||
@@ -31,9 +33,11 @@ let checkForWin = function () {
 		marker === boardArray[2] && marker === boardArray[5] && marker === boardArray[8] ||
 		marker === boardArray[0] && marker === boardArray[4] && marker === boardArray[8] ||
 		marker === boardArray[2] && marker === boardArray[4] && marker === boardArray[6] ){
-			win = true;
+			if(win === true){
+				over = true;
 			console.log("winner is " +marker);
 		}
+	}
 		return win;
 	};
 
@@ -100,7 +104,7 @@ let checkForWin = function () {
 				//if it is...
 				// mark the square as taken by this player
 				markSquare(index, this);
-				handles.onUpdateGame(marker, index);
+				handles.onUpdateGame(marker, index, over);
 				//communicate with the api
 				//log each move with index and marker
 				//take the index of the array and send it to the api to update the array

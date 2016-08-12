@@ -54,9 +54,9 @@ const onNewGame = function (event) {
   .done(ui.newGameSuccess)
   .fail(ui.failure);
 };
-const onUpdateGame = function onUpdateGame(marker, index) {
+const onUpdateGame = function onUpdateGame(marker, index, over) {
 	  event.preventDefault();
-	  api.updateGame(marker, index)
+	  api.updateGame(marker, index, over)
     .done(ui.updateGameSuccess)
     .fail(ui.failure);
 	};
