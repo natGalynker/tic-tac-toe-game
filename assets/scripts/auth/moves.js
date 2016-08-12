@@ -3,6 +3,7 @@ const handles = require('./handles');
 let turnTracker = 0;
 let marker = ' ';
 let index;
+let over = false;
 let currentPlayer = ' ';
 let boardArray = [null, null, null, null, null, null, null, null, null];
 
@@ -11,7 +12,6 @@ let checkForDraw = function(){
 	let draw = false;
 	if(turnTracker ===8){
 		draw = true;
-		console.log("It's a tie!");
 	} else {
 		draw = false;
 	}
@@ -32,6 +32,7 @@ let checkForWin = function () {
 		marker === boardArray[0] && marker === boardArray[4] && marker === boardArray[8] ||
 		marker === boardArray[2] && marker === boardArray[4] && marker === boardArray[6] ){
 			win = true;
+			over = true;
 			console.log("winner is " +marker);
 		}
 		return win;
@@ -79,10 +80,8 @@ let checkForWin = function () {
 	//mark the square as  occupied
 	const markSquare = function(index, domSquare) {
 		$(domSquare).text(marker);
-		console.log(domSquare);
 		// mark this square as taken on the board.
 		boardArray[index] = marker;
-		console.log("Marking square "+index);
 	};
 
 	$(() => {
@@ -91,7 +90,6 @@ let checkForWin = function () {
 		setGame();
 		//set up the click handlers
 		$('#refresh-game').on('click', setGame);
-		console.log("Refresh board when this button is clicked");
 		$('.main').on('click', 'div', function() {
 
 			index = parseInt($(this).data('number'), 10);
@@ -100,7 +98,7 @@ let checkForWin = function () {
 				//if it is...
 				// mark the square as taken by this player
 				markSquare(index, this);
-				handles.onUpdateGame(marker, index);
+				handles.onUpdateGame(marker, index, over);
 				//communicate with the api
 				//log each move with index and marker
 				//take the index of the array and send it to the api to update the array
@@ -110,6 +108,7 @@ let checkForWin = function () {
 				// update the UI
 				// see if we're done
 				if (checkForWin()) {
+					console.log("if over" + over);
 					$('h1').text("Winner is player" +" " +marker );
 					console.log("winner is player " +" " + marker );// flag that the game is done and this player won, somehow
 				} else if (checkForDraw()) {
