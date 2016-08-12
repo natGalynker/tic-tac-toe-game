@@ -59,7 +59,8 @@ const newGame = () => $.ajax({
 });
 
 const updateGame = function updateGame(marker, index, over) {
-	  return $.ajax({
+    console.log(over);
+    return $.ajax({
 	    url: app.api + '/games/' + app.game.id,
 	    method: 'PATCH',
 	    headers: {

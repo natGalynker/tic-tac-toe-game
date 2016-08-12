@@ -1,7 +1,7 @@
 'use strict';
 const getFormFields = require(`../../../lib/get-form-fields`);
 
-// const moves = require('./moves');
+const moves = require('./moves');
 const api = require('./api');
 const ui = require('./ui');
 

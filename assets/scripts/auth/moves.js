@@ -35,10 +35,11 @@ let checkForWin = function () {
 		marker === boardArray[2] && marker === boardArray[4] && marker === boardArray[6] ){
 			win = true;
 				over = true;
-			console.log("winner is " +marker);
+		//	console.log("winner is " +marker);
 		}
+
 		return win;
-	};
+};
 
 	//alternate players after
 	const swapPlayer = function(){
@@ -53,6 +54,7 @@ let checkForWin = function () {
 	};
 
 	const setPlay = function(){
+		over = false;
 		turnTracker = 0;
 		currentPlayer = 'Player x';
 		marker = 'x';
@@ -88,6 +90,7 @@ let checkForWin = function () {
 		console.log("Marking square "+index);
 	};
 
+
 	$(() => {
 
 		// init the game board
@@ -113,7 +116,7 @@ let checkForWin = function () {
 				// update the UI
 				// see if we're done
 				if (checkForWin()) {
-						over = true;
+					over = true;
 					$('h1').text("Winner is player" +" " +marker );
 					console.log("winner is player " +" " + marker );// flag that the game is done and this player won, somehow
 				} else if (checkForDraw()) {
@@ -122,7 +125,6 @@ let checkForWin = function () {
 					//else if checkForDraw or checkForWin true
 					//stop game play. Game over
 					//take this game over to send to api for update game
-
 				} else {
 					// 	// game is still going
 					swapPlayer();
