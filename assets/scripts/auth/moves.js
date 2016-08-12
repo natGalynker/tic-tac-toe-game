@@ -33,11 +33,10 @@ let checkForWin = function () {
 		marker === boardArray[2] && marker === boardArray[5] && marker === boardArray[8] ||
 		marker === boardArray[0] && marker === boardArray[4] && marker === boardArray[8] ||
 		marker === boardArray[2] && marker === boardArray[4] && marker === boardArray[6] ){
-			if(win === true){
+			win = true;
 				over = true;
 			console.log("winner is " +marker);
 		}
-	}
 		return win;
 	};
 
@@ -114,6 +113,7 @@ let checkForWin = function () {
 				// update the UI
 				// see if we're done
 				if (checkForWin()) {
+						over = true;
 					$('h1').text("Winner is player" +" " +marker );
 					console.log("winner is player " +" " + marker );// flag that the game is done and this player won, somehow
 				} else if (checkForDraw()) {
