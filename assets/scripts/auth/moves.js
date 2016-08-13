@@ -12,9 +12,12 @@ let checkForDraw = function(){
 	let draw = false;
 	if(turnTracker ===8){
 		draw = true;
+		over = true;
+		console.log("over is" + " " + over);
 	} else {
 		draw = false;
 	}
+	console.log("over should be true");
 	return draw;
 };
 
@@ -33,7 +36,8 @@ let checkForWin = function () {
 		marker === boardArray[2] && marker === boardArray[4] && marker === boardArray[6] ){
 			win = true;
 			over = true;
-			console.log("winner is " +marker);
+			//console.log("over is" + " "+ over);
+			// console.log("winner is " +marker);
 		}
 		return win;
 	};
@@ -52,6 +56,7 @@ let checkForWin = function () {
 
 	const setPlay = function(){
 		turnTracker = 0;
+		over = false;
 		currentPlayer = 'Player x';
 		marker = 'x';
 	};
@@ -87,37 +92,30 @@ let checkForWin = function () {
 	$(() => {
 
 		// init the game board
+
 		setGame();
 		//set up the click handlers
 		$('#refresh-game').on('click', setGame);
 		$('.main').on('click', 'div', function() {
-
 			index = parseInt($(this).data('number'), 10);
 			if (isSquareFree(index)) {
-				//check to see if the square is indeed free
-				//if it is...
-				// mark the square as taken by this player
+				//mark the square with x or o
 				markSquare(index, this);
+				//checking if the game is won
+				let isWon = checkForWin();
+					//upate the game with each move
+					//with PATCH AJAX request
 				handles.onUpdateGame(marker, index, over);
-				//communicate with the api
-				//log each move with index and marker
-				//take the index of the array and send it to the api to update the array
-
-				//with index and marker
-				//to updateGame to save that move to the api
-				// update the UI
-				// see if we're done
-				if (checkForWin()) {
-					console.log("if over" + over);
+				let doubleCheck = checkForDraw();
+				if(isWon){
+					//display winner on the screen
 					$('h1').text("Winner is player" +" " +marker );
-					console.log("winner is player " +" " + marker );// flag that the game is done and this player won, somehow
-				} else if (checkForDraw()) {
+					//check for  a tie
+				} else if(doubleCheck) {
+					over = true;
+					//display that its a draw on the screeu
 					console.log('Its a draw');
 					$('h1').text("It's a Cats Game!");
-					//else if checkForDraw or checkForWin true
-					//stop game play. Game over
-					//take this game over to send to api for update game
-
 				} else {
 					// 	// game is still going
 					swapPlayer();
