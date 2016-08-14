@@ -105,8 +105,8 @@ let checkForWin = function () {
 				let isWon = checkForWin();
 					//upate the game with each move
 					//with PATCH AJAX request
-				handles.onUpdateGame(marker, index, over);
 				let doubleCheck = checkForDraw();
+				handles.onUpdateGame(marker, index, over);
 				if(isWon){
 					//display winner on the screen
 					$('h1').text("Winner is player" +" " +marker );
