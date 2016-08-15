@@ -61,6 +61,13 @@ let checkForWin = function () {
 		marker = 'x';
 	};
 
+	const idlePlay = function(){
+		turnTracker = 0;
+		over = false;
+		currentPlayer = '';
+		marker = ' ';
+	};
+
 	const setGame = function(){
 		// empty board
 		boardArray = [];
@@ -76,6 +83,8 @@ let checkForWin = function () {
 		// //clear the UI so so multiple games can happen
 		$('.space').text('');
 		$('h1').text('');
+		 $('.main').removeClass('off-clicks');
+  	// $('.main').removeClass('off-clicks');
 		setPlay();
 	};
 	//check to see if square is null
@@ -88,16 +97,24 @@ let checkForWin = function () {
 		// mark this square as taken on the board.
 		boardArray[index] = marker;
 	};
-
+	// const gameDone = function(index, domSquare){
+	// 	over = true;
+	// 	$(domSquare).off();
+	// };
 	$(() => {
 
 		// init the game board
 
-		setGame();
+
 		//set up the click handlers
+		if(idlePlay){
+			$('.main').addClass('off-clicks');
+		}
+		setGame();
 		$('#refresh-game').on('click', setGame);
 		$('.main').on('click', 'div', function() {
 			index = parseInt($(this).data('number'), 10);
+			// $(this).addClass('off-clicks');
 			if (isSquareFree(index)) {
 				//mark the square with x or o
 				markSquare(index, this);
@@ -108,10 +125,12 @@ let checkForWin = function () {
 				let doubleCheck = checkForDraw();
 				handles.onUpdateGame(marker, index, over);
 				if(isWon){
+					$('.main').addClass('off-clicks');
 					//display winner on the screen
 					$('h1').text("Winner is player" +" " +marker );
 					//check for  a tie
 				} else if(doubleCheck) {
+					$('.main').addClass('off-clicks');
 					over = true;
 					//display that its a draw on the screeu
 					console.log('Its a draw');
@@ -122,12 +141,18 @@ let checkForWin = function () {
 				}
 			}
 		});
-	});
+	// 	 gameDone();
+	// 		$('.main').off('click', 'div', function() {
+	// 			console.log("no clicks");
+	// });
+});
 	module.exports = {
 		swapPlayer,
 		checkForDraw,
 		checkForWin,
 		setGame,
 		handles,
-		setPlay
+		setPlay,
+		idlePlay
+		// gameDone
 	};

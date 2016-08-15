@@ -32,13 +32,15 @@ const signInSuccess = (data) =>{
   };
   const updateGameSuccess = (data) => {
     app.game = data.game;
-    console.log(app);
+    console.log(app.game);
   };
 
-    const getGameSuccess = (data) => {
+    const getGamesByIdSuccess = (data) => {
       app.game = data.game;
+      console.log(data);
 
-    };
+
+};
 //   const getGameSuccess = (data) => {
 //     if(data.games){
 //       console.log(data.games);
@@ -53,5 +55,5 @@ const signInSuccess = (data) =>{
   signOutSuccess,
   newGameSuccess,
   updateGameSuccess,
-  getGameSuccess
+  getGamesByIdSuccess
 };

@@ -11,6 +11,10 @@ $lavender: #e6e6fa;
   width: 639px;
 }
 
+.off-clicks {
+  pointer-events: none;
+}
+
 .space {
   background-color: $lavender;
   float: left;

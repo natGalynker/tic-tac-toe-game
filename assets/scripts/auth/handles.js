@@ -28,19 +28,14 @@ const onChangePassword = function onChangePassword(event) {
   .done(ui.success)
   .fail(ui.failure);
 };
-const onGetGames = function onGetGames(event) {
-	  event.preventDefault();
-	  let gameId = $('.get-games').val();
-	  if (gameId.length === 0) {
-	    api.index()
-      .done(ui.getGameSuccess)
-      .fail(ui.failure);
-	  } else {
-	    api.show(gameId)
-      .done(ui.getGameSuccess)
-      .fail(ui.failure);
- }
- };
+const onGetGamesById = function onGetGamesById(event) {
+  let data = getFormFields(this);
+  console.log(data.id);
+  event.preventDefault();
+  api.getGamesById(data)
+    .done(ui.getGamesByIdSuccess)
+    .fail(ui.failure);
+};
 const onSignOut = function onSignOut(event) {
   event.preventDefault();
   api.signOut()
@@ -67,16 +62,9 @@ const addHandlers = () => {
   $('#change-password').on('submit', onChangePassword);
   $('#sign-out').on('submit', onSignOut);    //id on sign-up. Then does something
   $('.new-game').on('click', onNewGame);
-  $('#getGames').on('click', onGetGames);
-
-
-
-
+  $('#game-id').on('submit', onGetGamesById);
 
 };
-$(() => {
-
-});
 module.exports = {
   addHandlers,
   onUpdateGame

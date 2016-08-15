@@ -18,23 +18,23 @@ const signIn = function (data) {
     data,
 });
 };
-const index = function index() {
+
+// const getGame = function (){
+//   return $.ajax({
+//     url: app.api + 'games',
+//     method: 'GET',
+//     headers: {
+//       Authorization: 'Token token=' + app.user.token
+//     },
+//   });
+// };
+const getGamesById = function (data){
   return $.ajax({
-    url: app.api + '/games',
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + app.user.token
-    }
-  });
-};
-const show = function show(data) {
-  return $.ajax({
-    url: app.api + '/games/' + app.game.id,
+    url: app.api + '/games/' + data.id,
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + app.user.token
     },
-    data: data
   });
 };
 
@@ -57,6 +57,7 @@ const newGame = () => $.ajax({
     Authorization: 'Token token=' + app.user.token,
   },
 });
+
 
 const updateGame = function updateGame(marker, index, over) {
 	  return $.ajax({
@@ -93,7 +94,7 @@ module.exports = {
   changePassword,
   signOut,
   newGame,
-  index,
-  updateGame,
-  show
+  getGamesById,
+  updateGame
+
 };
