@@ -84,7 +84,6 @@ let checkForWin = function () {
 		$('.space').text('');
 		$('h1').text('');
 		 $('.main').removeClass('off-clicks');
-  	// $('.main').removeClass('off-clicks');
 		setPlay();
 	};
 	//check to see if square is null
@@ -97,33 +96,28 @@ let checkForWin = function () {
 		// mark this square as taken on the board.
 		boardArray[index] = marker;
 	};
-	// const gameDone = function(index, domSquare){
-	// 	over = true;
-	// 	$(domSquare).off();
-	// };
+
 	$(() => {
 
 		// init the game board
 
-
-		//set up the click handlers
-		if(idlePlay){
-			$('.main').addClass('off-clicks');
-		}
 		setGame();
+		$('.main').addClass('off-clicks');
+		$('.new-game').on('click', setGame);
 		$('#refresh-game').on('click', setGame);
 		$('.main').on('click', 'div', function() {
+
+			//push the values to the array that holds the gameboard
 			index = parseInt($(this).data('number'), 10);
-			// $(this).addClass('off-clicks');
 			if (isSquareFree(index)) {
 				//mark the square with x or o
 				markSquare(index, this);
-				//checking if the game is won
 				let isWon = checkForWin();
-					//upate the game with each move
-					//with PATCH AJAX request
 				let doubleCheck = checkForDraw();
+				//upate the game with each move
+				//with PATCH AJAX request
 				handles.onUpdateGame(marker, index, over);
+				//checking if the game is won
 				if(isWon){
 					$('.main').addClass('off-clicks');
 					//display winner on the screen
@@ -132,7 +126,7 @@ let checkForWin = function () {
 				} else if(doubleCheck) {
 					$('.main').addClass('off-clicks');
 					over = true;
-					//display that its a draw on the screeu
+					//display that its a draw on the screen
 					console.log('Its a draw');
 					$('h1').text("It's a Cats Game!");
 				} else {
@@ -141,10 +135,6 @@ let checkForWin = function () {
 				}
 			}
 		});
-	// 	 gameDone();
-	// 		$('.main').off('click', 'div', function() {
-	// 			console.log("no clicks");
-	// });
 });
 	module.exports = {
 		swapPlayer,
@@ -154,5 +144,5 @@ let checkForWin = function () {
 		handles,
 		setPlay,
 		idlePlay
-		// gameDone
+
 	};

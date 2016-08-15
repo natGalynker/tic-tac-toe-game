@@ -61,8 +61,8 @@ const addHandlers = () => {
   $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element
   $('#change-password').on('submit', onChangePassword);
   $('#sign-out').on('submit', onSignOut);    //id on sign-up. Then does something
-  $('.new-game').on('click', onNewGame);
   $('#game-id').on('submit', onGetGamesById);
+  $('.new-game').on('click', onNewGame);
 
 };
 module.exports = {
