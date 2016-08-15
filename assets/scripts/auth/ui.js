@@ -32,9 +32,16 @@ const signInSuccess = (data) =>{
   };
   const updateGameSuccess = (data) => {
     app.game = data.game;
-    console.log(app);
+    console.log(app.game);
   };
 
+    const getGamesByIdSuccess = (data) => {
+      app.game = data.game;
+      $(".get-id-append").append('<h1>'+ data.game.player_x.email + '  was the player'+ '</h1>');
+      console.log(data);
+
+
+};
 //   const getGameSuccess = (data) => {
 //     if(data.games){
 //       console.log(data.games);
@@ -48,6 +55,6 @@ const signInSuccess = (data) =>{
   signInSuccess,
   signOutSuccess,
   newGameSuccess,
-  //getGameSuccess
-  updateGameSuccess
+  updateGameSuccess,
+  getGamesByIdSuccess
 };

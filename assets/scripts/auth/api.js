@@ -19,6 +19,25 @@ const signIn = function (data) {
 });
 };
 
+// const getGame = function (){
+//   return $.ajax({
+//     url: app.api + 'games',
+//     method: 'GET',
+//     headers: {
+//       Authorization: 'Token token=' + app.user.token
+//     },
+//   });
+// };
+const getGamesById = function (data){
+  return $.ajax({
+    url: app.api + '/games/' + data.id,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + app.user.token
+    },
+  });
+};
+
 const changePassword = function (data) {
   console.log(data);
   console.log(app.user.token);
@@ -38,43 +57,28 @@ const newGame = () => $.ajax({
     Authorization: 'Token token=' + app.user.token,
   },
 });
-const updateGame = (marker, index) => $.ajax({
-  url: app.api+ '/games/' + app.game.id,
-  method: 'PATCH',
-  headers: {
-    Authorization: 'Token token=' + app.user.token,
-  },
-  data:
-  {
-  "game": {
-    "cell": {
-      "index": index,
-      "value": marker
-    },
-    "over": false
-  }
-}
-});
 
-const index = function () {
-  return $.ajax({
-    url: app.api + '/games',
-    method: 'GET',
-    headers: {
-    Authorization: 'Token token=' + app.user.token,
-    },
-  });
-};
-const show = function(data){
-  return $.ajax({
-    url: app.api + '/games/' + app.user.id,
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + app.user.token,
-    },
-      data,
-  });
-};
+
+const updateGame = function updateGame(marker, index, over) {
+	  return $.ajax({
+	    url: app.api + '/games/' + app.game.id,
+	    method: 'PATCH',
+	    headers: {
+	      Authorization: 'Token token=' + app.user.token
+	    },
+	    data: {
+	      "game": {
+	        "cell": {
+	          "index": index,
+	          "value": marker
+	        },
+	        "over": over
+	      }
+	    }
+	  });
+	};
+
+
 
 const signOut = () => $.ajax({
   url: app.api +'/sign-out/' + app.user.id,
@@ -90,7 +94,7 @@ module.exports = {
   changePassword,
   signOut,
   newGame,
-  index,
-  updateGame,
-  show
+  getGamesById,
+  updateGame
+
 };

@@ -3,6 +3,7 @@ const handles = require('./handles');
 let turnTracker = 0;
 let marker = ' ';
 let index;
+let over = false;
 let currentPlayer = ' ';
 let boardArray = [null, null, null, null, null, null, null, null, null];
 
@@ -11,10 +12,12 @@ let checkForDraw = function(){
 	let draw = false;
 	if(turnTracker ===8){
 		draw = true;
-		console.log("It's a tie!");
+		over = true;
+		console.log("over is" + " " + over);
 	} else {
 		draw = false;
 	}
+	console.log("over should be true");
 	return draw;
 };
 
@@ -32,7 +35,9 @@ let checkForWin = function () {
 		marker === boardArray[0] && marker === boardArray[4] && marker === boardArray[8] ||
 		marker === boardArray[2] && marker === boardArray[4] && marker === boardArray[6] ){
 			win = true;
-			console.log("winner is " +marker);
+			over = true;
+			//console.log("over is" + " "+ over);
+			// console.log("winner is " +marker);
 		}
 		return win;
 	};
@@ -51,8 +56,16 @@ let checkForWin = function () {
 
 	const setPlay = function(){
 		turnTracker = 0;
+		over = false;
 		currentPlayer = 'Player x';
 		marker = 'x';
+	};
+
+	const idlePlay = function(){
+		turnTracker = 0;
+		over = false;
+		currentPlayer = '';
+		marker = ' ';
 	};
 
 	const setGame = function(){
@@ -70,6 +83,7 @@ let checkForWin = function () {
 		// //clear the UI so so multiple games can happen
 		$('.space').text('');
 		$('h1').text('');
+		 $('.main').removeClass('off-clicks');
 		setPlay();
 	};
 	//check to see if square is null
@@ -79,58 +93,56 @@ let checkForWin = function () {
 	//mark the square as  occupied
 	const markSquare = function(index, domSquare) {
 		$(domSquare).text(marker);
-		console.log(domSquare);
 		// mark this square as taken on the board.
 		boardArray[index] = marker;
-		console.log("Marking square "+index);
 	};
 
 	$(() => {
 
 		// init the game board
+
 		setGame();
-		//set up the click handlers
+		$('.main').addClass('off-clicks');
+		$('.new-game').on('click', setGame);
 		$('#refresh-game').on('click', setGame);
-		console.log("Refresh board when this button is clicked");
 		$('.main').on('click', 'div', function() {
 
+			//push the values to the array that holds the gameboard
 			index = parseInt($(this).data('number'), 10);
-			handles.onUpdateGame(index, marker);
 			if (isSquareFree(index)) {
-				//check to see if the square is indeed free
-				//if it is...
-				// mark the square as taken by this player
+				//mark the square with x or o
 				markSquare(index, this);
-				//communicate with the api
-				//log each move with index and marker
-				//take the index of the array and send it to the api to update the array
-
-				//with index and marker
-				//to updateGame to save that move to the api
-				// update the UI
-				// see if we're done
-				if (checkForWin()) {
+				let isWon = checkForWin();
+				let doubleCheck = checkForDraw();
+				//upate the game with each move
+				//with PATCH AJAX request
+				handles.onUpdateGame(marker, index, over);
+				//checking if the game is won
+				if(isWon){
+					$('.main').addClass('off-clicks');
+					//display winner on the screen
 					$('h1').text("Winner is player" +" " +marker );
-					console.log("winner is player " +" " + marker );// flag that the game is done and this player won, somehow
-				} else if (checkForDraw()) {
+					//check for  a tie
+				} else if(doubleCheck) {
+					$('.main').addClass('off-clicks');
+					over = true;
+					//display that its a draw on the screen
 					console.log('Its a draw');
 					$('h1').text("It's a Cats Game!");
-					//else if checkForDraw or checkForWin true
-					//stop game play. Game over
-					//take this game over to send to api for update game
-
 				} else {
 					// 	// game is still going
 					swapPlayer();
 				}
 			}
 		});
-	});
+});
 	module.exports = {
 		swapPlayer,
 		checkForDraw,
 		checkForWin,
 		setGame,
 		handles,
-		setPlay
+		setPlay,
+		idlePlay
+
 	};
