@@ -83,7 +83,7 @@ let checkForWin = function () {
 		// //clear the UI so so multiple games can happen
 		$('.space').text('');
 		$('h1').text('');
-		 $('.main').removeClass('off-clicks');
+		$('.main').removeClass('off-clicks');
 		setPlay();
 	};
 	//check to see if square is null
@@ -105,11 +105,12 @@ let checkForWin = function () {
 		$('.main').addClass('off-clicks');
 		$('.new-game').on('click', setGame);
 		$('#refresh-game').on('click', setGame);
-		$('.main').on('click', 'div', function() {
-
+		$('.main').on('click', 'div', function(){
 			//push the values to the array that holds the gameboard
+			// $('.main').removeClass('off-clicks');
 			index = parseInt($(this).data('number'), 10);
 			if (isSquareFree(index)) {
+				$('.main').removeClass('off-clicks');
 				//mark the square with x or o
 				markSquare(index, this);
 				let isWon = checkForWin();
@@ -130,12 +131,12 @@ let checkForWin = function () {
 					console.log('Its a draw');
 					$('h1').text("It's a Cats Game!");
 				} else {
-					// 	// game is still going
+					//     // game is still going
 					swapPlayer();
 				}
 			}
 		});
-});
+	});
 	module.exports = {
 		swapPlayer,
 		checkForDraw,
@@ -144,5 +145,4 @@ let checkForWin = function () {
 		handles,
 		setPlay,
 		idlePlay
-
 	};
