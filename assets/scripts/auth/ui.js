@@ -23,12 +23,15 @@ const newGameSuccess = (data) => {
 const signInSuccess = (data) =>{
   app.user = data.user; //can use app.user or app.token. we know this because the
   console.log(app);     //console in browser told us that we have the key user
-                        //even though we did not define one. User contains the
+  $('.main').css("display", "block"); //even though we did not define one. User contains the
+  $('.space').text('');
+  $('h1').text('');
   };                      //token that we care about
 
   const signOutSuccess = () =>{
     delete app.user;
     console.log(app);
+    $('.main').css("display", "none");
   };
   const updateGameSuccess = (data) => {
     app.game = data.game;

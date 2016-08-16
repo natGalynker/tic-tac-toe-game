@@ -105,11 +105,12 @@ let checkForWin = function () {
 		$('.main').addClass('off-clicks');
 		$('.new-game').on('click', setGame);
 		$('#refresh-game').on('click', setGame);
-		$('.main').on('click', 'div', function() {
-
+		$('.main').on('click', 'div', function(){
 			//push the values to the array that holds the gameboard
+			// $('.main').removeClass('off-clicks');
 			index = parseInt($(this).data('number'), 10);
 			if (isSquareFree(index)) {
+				$('.main').removeClass('off-clicks');
 				//mark the square with x or o
 				markSquare(index, this);
 				let isWon = checkForWin();
@@ -135,7 +136,7 @@ let checkForWin = function () {
 				}
 			}
 		});
-});
+	});
 	module.exports = {
 		swapPlayer,
 		checkForDraw,

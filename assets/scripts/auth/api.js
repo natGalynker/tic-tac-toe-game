@@ -1,9 +1,10 @@
 'use strict';
+
  const app = require('../main');
 // keep eye on the names used as the form id. they correlate to the end points
 //that are being assigned to the url's value here.
 const signUp =  function(data) {
-  console.log(data);
+console.log(data);
 return $.ajax({ //same as return $.ajax({
     url: app.api + '/sign-up',
     method: 'POST',
@@ -19,15 +20,6 @@ const signIn = function (data) {
 });
 };
 
-// const getGame = function (){
-//   return $.ajax({
-//     url: app.api + 'games',
-//     method: 'GET',
-//     headers: {
-//       Authorization: 'Token token=' + app.user.token
-//     },
-//   });
-// };
 const getGamesById = function (data){
   return $.ajax({
     url: app.api + '/games/' + data.id,

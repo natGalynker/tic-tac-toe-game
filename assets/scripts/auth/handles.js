@@ -1,9 +1,87 @@
 'use strict';
 const getFormFields = require(`../../../lib/get-form-fields`);
 
-// const moves = require('./moves');
-const api = require('./api');
+
+const  api= require('./api');
 const ui = require('./ui');
+
+// const signUp =  function(data) {
+// console.log(data);
+// return $.ajax({ //same as return $.ajax({
+//     url: app + '/sign-up',
+//     method: 'POST',
+//     data,
+// });
+// };
+// const signIn = function (data) {
+//   console.log(data);
+//   return $.ajax({
+//     url: app + '/sign-in',
+//     method: 'POST',
+//     data,
+// });
+// };
+//
+// const getGamesById = function (data){
+//   return $.ajax({
+//     url: app+ '/games/' + data.id,
+//     method: 'GET',
+//     headers: {
+//       Authorization: 'Token token=' + app.user.token
+//     },
+//   });
+// };
+//
+// const changePassword = function (data) {
+//   console.log(data);
+//   console.log(app.user.token);
+//   return $.ajax({
+//   url: app + '/change-password/'  + app.user.id,
+//   method: 'PATCH',
+//   headers: {
+//     Authorization: 'Token token=' + app.user.token,
+//   },
+//     data,
+// });
+// };
+// const newGame = () => $.ajax({
+//   url: app+ '/games/',
+//   method: 'POST',
+//   headers: {
+//     Authorization: 'Token token=' + app.user.token,
+//   },
+// });
+//
+//
+// const updateGame = function updateGame(marker, index, over) {
+// 	  return $.ajax({
+// 	    url: app + '/games/' + app.game.id,
+// 	    method: 'PATCH',
+// 	    headers: {
+// 	      Authorization: 'Token token=' + app.user.token
+// 	    },
+// 	    data: {
+// 	      "game": {
+// 	        "cell": {
+// 	          "index": index,
+// 	          "value": marker
+// 	        },
+// 	        "over": over
+// 	      }
+// 	    }
+// 	  });
+// 	};
+//
+//
+//
+// const signOut = () => $.ajax({
+//   url: app +'/sign-out/' + app.user.id,
+//   method: 'DELETE',
+//   headers: {
+//     Authorization: 'Token token=' + app.user.token,
+//   },
+// });
+//
 
 const onSignUp = function (event) {
   let data = getFormFields(this);
@@ -56,6 +134,7 @@ const onUpdateGame = function onUpdateGame(marker, index, over) {
     .fail(ui.failure);
 	};
 
+
 const addHandlers = () => {
   $('#player-sign-up').on('submit', onSignUp);
   $('#player-sign-in').on('submit', onSignIn); //grab element from the dom with element
@@ -67,5 +146,5 @@ const addHandlers = () => {
 };
 module.exports = {
   addHandlers,
-  onUpdateGame
+  onUpdateGame,
 };

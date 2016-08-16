@@ -2,7 +2,9 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 $lavender: #e6e6fa;
 
+
 .main {
+  // display: initial;
   height: 639px;
   margin: 17% auto;
   overflow: hidden;
@@ -16,7 +18,7 @@ $lavender: #e6e6fa;
 }
 
 .on-clicks {
-  pointer-events: auto;
+  pointer-events: initial;
 }
 
 .space {
