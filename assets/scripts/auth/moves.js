@@ -83,7 +83,7 @@ let checkForWin = function () {
 		// //clear the UI so so multiple games can happen
 		$('.space').text('');
 		$('h1').text('');
-		 $('.main').removeClass('off-clicks');
+		$('.main').removeClass('off-clicks');
 		setPlay();
 	};
 	//check to see if square is null
@@ -131,7 +131,7 @@ let checkForWin = function () {
 					console.log('Its a draw');
 					$('h1').text("It's a Cats Game!");
 				} else {
-					// 	// game is still going
+					//     // game is still going
 					swapPlayer();
 				}
 			}
@@ -145,5 +145,4 @@ let checkForWin = function () {
 		handles,
 		setPlay,
 		idlePlay
-
 	};
