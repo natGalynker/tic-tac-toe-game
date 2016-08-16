@@ -50,84 +50,6 @@ webpackJsonp([0],[
 	var api = __webpack_require__(5);
 	var ui = __webpack_require__(7);
 
-	// const signUp =  function(data) {
-	// console.log(data);
-	// return $.ajax({ //same as return $.ajax({
-	//     url: app + '/sign-up',
-	//     method: 'POST',
-	//     data,
-	// });
-	// };
-	// const signIn = function (data) {
-	//   console.log(data);
-	//   return $.ajax({
-	//     url: app + '/sign-in',
-	//     method: 'POST',
-	//     data,
-	// });
-	// };
-	//
-	// const getGamesById = function (data){
-	//   return $.ajax({
-	//     url: app+ '/games/' + data.id,
-	//     method: 'GET',
-	//     headers: {
-	//       Authorization: 'Token token=' + app.user.token
-	//     },
-	//   });
-	// };
-	//
-	// const changePassword = function (data) {
-	//   console.log(data);
-	//   console.log(app.user.token);
-	//   return $.ajax({
-	//   url: app + '/change-password/'  + app.user.id,
-	//   method: 'PATCH',
-	//   headers: {
-	//     Authorization: 'Token token=' + app.user.token,
-	//   },
-	//     data,
-	// });
-	// };
-	// const newGame = () => $.ajax({
-	//   url: app+ '/games/',
-	//   method: 'POST',
-	//   headers: {
-	//     Authorization: 'Token token=' + app.user.token,
-	//   },
-	// });
-	//
-	//
-	// const updateGame = function updateGame(marker, index, over) {
-	// 	  return $.ajax({
-	// 	    url: app + '/games/' + app.game.id,
-	// 	    method: 'PATCH',
-	// 	    headers: {
-	// 	      Authorization: 'Token token=' + app.user.token
-	// 	    },
-	// 	    data: {
-	// 	      "game": {
-	// 	        "cell": {
-	// 	          "index": index,
-	// 	          "value": marker
-	// 	        },
-	// 	        "over": over
-	// 	      }
-	// 	    }
-	// 	  });
-	// 	};
-	//
-	//
-	//
-	// const signOut = () => $.ajax({
-	//   url: app +'/sign-out/' + app.user.id,
-	//   method: 'DELETE',
-	//   headers: {
-	//     Authorization: 'Token token=' + app.user.token,
-	//   },
-	// });
-	//
-
 	var onSignUp = function onSignUp(event) {
 	  var data = getFormFields(this);
 	  event.preventDefault();
@@ -374,9 +296,9 @@ webpackJsonp([0],[
 	  app.user = data.user; //can use app.user or app.token. we know this because the
 	  console.log(app); //console in browser told us that we have the key user
 	  $('.main').css("display", "block"); //even though we did not define one. User contains the
-	  $('.space').text('');
+	  $('.space').text(''); //the token that we care about
 	  $('h1').text('');
-	}; //token that we care about
+	};
 
 	var signOutSuccess = function signOutSuccess() {
 	  delete app.user;
@@ -393,13 +315,7 @@ webpackJsonp([0],[
 	  $(".get-id-append").append('<h1>' + data.game.player_x.email + '  was the player' + '</h1>');
 	  console.log(data);
 	};
-	//   const getGameSuccess = (data) => {
-	//     if(data.games){
-	//       console.log(data.games);
-	//   } else{
-	//     console.log('fail');
-	//   }
-	// };
+
 	module.exports = {
 	  failure: failure,
 	  success: success,
@@ -542,7 +458,7 @@ webpackJsonp([0],[
 					console.log('Its a draw');
 					$('h1').text("It's a Cats Game!");
 				} else {
-					// 	// game is still going
+					//     // game is still going
 					swapPlayer();
 				}
 			}
@@ -556,7 +472,6 @@ webpackJsonp([0],[
 		handles: handles,
 		setPlay: setPlay,
 		idlePlay: idlePlay
-
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
